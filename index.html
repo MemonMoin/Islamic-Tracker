@@ -10,201 +10,202 @@
 <meta name="apple-mobile-web-app-title" content="Daily Tracker">
 <title>Daily Tracker</title>
 <style>
-:root {
-  --bg:#0d0d0d; --card:#1a1a1a; --card2:#222; --border:#2e2e2e;
-  --text:#e8e8e8; --muted:#777; --gold:#c8a84b; --accent:#4ec9b0;
-  --teal:#56c9a0; --red:#e05c5c; --green:#4ec9b0; --weekend:#e07070;
-  --hi-bg:rgba(78,201,176,0.08); --hi-brd:#4ec9b0;
+:root{
+  --bg:#0a0a0a;--card:#141414;--card2:#1c1c1c;--border:#252525;
+  --text:#f0f0f0;--muted:#555;--gold:#c8a84b;--accent:#3dd6b5;
+  --red:#e05c5c;--green:#3dd6b5;--weekend:#e07a70;--hi:#1a3330;
 }
-*{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
-html,body{ scrollbar-width:none; -ms-overflow-style:none; height:100%; overflow:hidden; }
-html::-webkit-scrollbar,body::-webkit-scrollbar{ display:none; }
-body{ background:var(--bg); color:var(--text); font-family:-apple-system,sans-serif; }
-.frame{ max-width:430px; margin:0 auto; height:100vh; display:flex; flex-direction:column; overflow:hidden; }
-.page{ display:none; flex:1; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
-.page::-webkit-scrollbar{ display:none; }
-.page.active{ display:flex; flex-direction:column; }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;scrollbar-width:none;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif;}
+.frame{max-width:430px;margin:0 auto;height:100vh;display:flex;flex-direction:column;}
+.page{display:none;flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;}
+.page::-webkit-scrollbar{display:none;}
+.page.active{display:flex;flex-direction:column;}
 
 /* NAV */
-.nav-tabs{ background:var(--card); border-top:1px solid var(--border); display:flex; flex-shrink:0; padding-bottom:env(safe-area-inset-bottom); }
-.nav-tab{ flex:1; padding:8px 0 10px; text-align:center; font-size:9px; color:var(--muted); cursor:pointer; border:none; background:none; transition:color 0.2s; }
-.nav-tab .ti{ font-size:19px; display:block; margin-bottom:2px; }
-.nav-tab.active{ color:var(--accent); }
+.nav{background:var(--card);border-top:1px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom);flex-shrink:0;}
+.nt{flex:1;padding:9px 0 11px;text-align:center;border:none;background:none;cursor:pointer;color:var(--muted);transition:color 0.2s;}
+.nt svg{display:block;margin:0 auto 3px;}
+.nt span{font-size:9px;letter-spacing:0.3px;}
+.nt.active{color:var(--accent);}
 
-/* HOME */
-#page-home{ padding:0; gap:0; justify-content:space-between; padding-bottom:10px; }
-.home-top{ padding:16px 18px 10px; flex-shrink:0; }
-.home-date-row{ display:flex; align-items:flex-start; justify-content:space-between; }
-.home-date-main{ font-family:Georgia,serif; font-size:20px; font-weight:700; line-height:1.2; }
-.day-name{ text-decoration:underline; font-style:italic; }
-.home-daytype{ font-size:13px; font-weight:600; margin-top:2px; }
-.home-daytype.weekday{ color:var(--accent); }
-.home-daytype.weekend{ color:var(--weekend); }
-.home-sub{ font-size:11px; color:var(--muted); margin-top:3px; line-height:1.6; }
-.home-clock-big{ font-family:Georgia,serif; font-size:38px; font-weight:700; color:var(--accent); letter-spacing:2px; text-align:right; line-height:1; }
-.home-clock-sec{ font-size:14px; color:var(--muted); text-align:right; margin-top:2px; }
-.home-cards{ display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 12px; flex-shrink:0; }
-.hcard{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px 14px; }
-.hcard-label{ font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
-.hcard-val{ font-family:Georgia,serif; font-size:20px; font-weight:700; color:var(--gold); }
-.hcard-sub{ font-size:11px; color:var(--accent); margin-top:3px; font-weight:600; }
+/* ══ HOME ══ */
+#page-home{padding:20px 16px 16px;gap:10px;}
+.home-header{display:flex;justify-content:space-between;align-items:flex-start;}
+.home-date-main{font-family:Georgia,serif;font-size:22px;font-weight:700;letter-spacing:-0.3px;line-height:1.1;}
+.home-date-main .dn{text-decoration:underline;font-style:italic;}
+.home-dtype{font-size:11px;font-weight:600;margin-top:3px;letter-spacing:0.5px;text-transform:uppercase;}
+.home-dtype.weekday{color:var(--accent);}
+.home-dtype.weekend{color:var(--weekend);}
+.home-sub{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.7;}
+.clock-hm{font-family:Georgia,serif;font-size:40px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;text-align:right;}
+.clock-s{font-size:12px;color:var(--muted);text-align:right;margin-top:2px;}
 
-/* Namaz pills on home */
-.home-namaz{ padding:0 12px; flex-shrink:0; }
-.home-namaz-inner{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px 14px; }
-.hnam-label{ font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
-.hnam-pills{ display:flex; gap:6px; flex-wrap:wrap; }
-.hnam-pill{ font-size:12px; padding:4px 12px; border-radius:20px; font-weight:500; cursor:pointer; }
-.hnam-pill.st-pending{ background:rgba(107,138,112,0.15); color:var(--muted); }
-.hnam-pill.st-prayed{ background:rgba(78,201,176,0.18); color:var(--green); }
-.hnam-pill.st-missed{ background:rgba(224,92,92,0.15); color:var(--red); }
-.hnam-pill.cur{ border:1px solid var(--accent); }
-.prog-bar{ height:3px; background:var(--border); border-radius:2px; margin-top:8px; }
-.prog-fill{ height:100%; background:linear-gradient(90deg,var(--teal),var(--accent)); transition:width 0.4s; border-radius:2px; }
+/* Quote — now above namaz */
+.quote-block{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;gap:10px;}
+.qm{font-family:Georgia,serif;font-size:28px;line-height:1;color:var(--accent);opacity:0.3;flex-shrink:0;margin-top:-3px;}
+.qt{font-family:Georgia,serif;font-size:12px;font-style:italic;line-height:1.6;color:var(--text);}
+.qs{font-size:10px;color:var(--muted);margin-top:4px;}
 
-/* Tasks on home */
-.home-tasks{ padding:0 12px; flex-shrink:0; }
-.home-tasks-inner{ background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
-.home-tasks-hdr{ padding:10px 14px 8px; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
-.home-task-row{ display:flex; align-items:center; gap:10px; padding:9px 14px; border-bottom:1px solid var(--border); cursor:pointer; }
-.home-task-row:last-child{ border-bottom:none; }
-.radio{ width:20px; height:20px; border-radius:50%; border:2px solid var(--muted); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
-.home-task-row.done .radio{ border-color:var(--green); background:var(--green); }
-.home-task-row.done .radio::after{ content:""; width:6px; height:4px; border-left:2px solid #000; border-bottom:2px solid #000; transform:rotate(-45deg) translateY(-1px); }
-.home-task-lbl{ font-size:13px; flex:1; }
-.home-task-row.done .home-task-lbl{ color:var(--muted); text-decoration:line-through; }
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 14px 12px;}
+.card-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;}
+.card-val{font-family:Georgia,serif;font-size:22px;font-weight:700;color:var(--gold);line-height:1;}
+.card-sub{font-size:11px;color:var(--accent);margin-top:5px;font-weight:500;}
 
-/* Quote */
-.home-quote{ padding:0 12px; flex-shrink:0; }
-.home-quote-inner{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:10px 14px; display:flex; gap:10px; align-items:flex-start; }
-.qmark{ font-family:Georgia,serif; font-size:32px; color:var(--accent); opacity:0.4; line-height:1; flex-shrink:0; margin-top:-4px; }
-.qtext{ font-family:Georgia,serif; font-size:12px; font-style:italic; line-height:1.5; color:var(--text); }
-.qsrc{ font-size:10px; color:var(--muted); margin-top:3px; }
+.namaz-block{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;}
+.block-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.block-title{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;}
+.missed-lbl{font-size:10px;color:var(--red);font-weight:600;}
+.pills{display:flex;gap:5px;flex-wrap:wrap;}
+.pill{font-size:11px;padding:5px 11px;border-radius:20px;cursor:pointer;font-weight:500;border:1px solid transparent;transition:all 0.15s;}
+.pill.st-pending{background:var(--card2);color:var(--muted);}
+.pill.st-prayed{background:rgba(61,214,181,0.12);color:var(--green);border-color:rgba(61,214,181,0.2);}
+.pill.st-missed{background:rgba(224,92,92,0.1);color:var(--red);border-color:rgba(224,92,92,0.2);}
+.pill.cur{border-color:var(--accent)!important;}
+.pbar{height:2px;background:var(--border);border-radius:2px;margin-top:10px;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--accent),#5ee8cc);transition:width 0.4s;border-radius:2px;}
 
-/* DHIKR PAGE */
-.page-inner{ padding:12px 12px 20px; }
-.section{ margin-bottom:10px; background:var(--card); border-radius:14px; overflow:hidden; border:1px solid var(--border); }
-.sec-hdr{ padding:10px 16px; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
-.edit-btn{ font-size:11px; color:var(--teal); background:none; border:none; cursor:pointer; padding:0; letter-spacing:0; text-transform:none; }
-.counter-row{ display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid var(--border); flex-wrap:wrap; }
-.counter-row:last-child{ border-bottom:none; }
-.c-label{ flex:1; min-width:140px; }
-.c-arabic{ font-family:Georgia,serif; font-size:13px; margin-bottom:2px; white-space:normal; word-break:break-word; line-height:1.4; }
-.c-meaning{ font-size:10px; color:var(--muted); font-style:italic; white-space:normal; word-break:break-word; line-height:1.4; }
-.c-done .c-arabic{ color:var(--muted); text-decoration:line-through; }
-.c-controls{ display:flex; align-items:center; background:var(--card2); border:1px solid var(--border); border-radius:10px; overflow:hidden; flex-shrink:0; }
-.c-btn{ background:none; border:none; color:var(--text); font-size:26px; cursor:pointer; width:44px; height:44px; display:flex; align-items:center; justify-content:center; -webkit-user-select:none; user-select:none; transition:background 0.12s; }
-.c-btn:active{ background:rgba(255,255,255,0.06); }
-.c-val-wrap{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:46px; padding:0 2px; border-left:1px solid var(--border); border-right:1px solid var(--border); }
-.c-val{ font-family:Georgia,serif; font-size:17px; font-weight:700; color:var(--gold); line-height:1; }
-.c-val.done{ color:var(--green); }
-.c-tgt{ font-size:9px; color:var(--muted); margin-top:1px; }
-.reset-wrap{ text-align:center; padding:4px 0 8px; }
-.reset-btn{ background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--muted); font-size:12px; padding:6px 20px; border-radius:20px; cursor:pointer; }
-.confirm-box{ display:none; margin:10px 16px 0; background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:12px 16px; font-size:13px; text-align:center; }
-.confirm-box.vis{ display:block; }
-.confirm-actions{ display:flex; gap:10px; margin-top:10px; justify-content:center; }
-.cy{ background:rgba(224,92,92,0.15); border:1px solid var(--red); color:var(--red); padding:5px 20px; border-radius:20px; font-size:12px; cursor:pointer; }
-.cn{ background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--muted); padding:5px 20px; border-radius:20px; font-size:12px; cursor:pointer; }
+.tasks-block{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.tasks-hdr{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 10px;border-bottom:1px solid var(--border);}
+.tasks-hdr-title{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;}
+.edt{background:none;border:none;color:var(--accent);font-size:11px;cursor:pointer;padding:0;}
+.trow{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;}
+.trow:last-child{border-bottom:none;}
+.trow:active{background:var(--card2);}
+.chk{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--muted);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.trow.done .chk{background:var(--accent);border-color:var(--accent);}
+.trow.done .chk::after{content:"";width:5px;height:4px;border-left:1.5px solid #000;border-bottom:1.5px solid #000;transform:rotate(-45deg) translateY(-1px);}
+.tlbl{font-size:13px;flex:1;}
+.trow.done .tlbl{color:var(--muted);text-decoration:line-through;}
 
-/* NAMAZ section inside dhikr page */
-.namaz-row{ display:flex; align-items:center; padding:12px 16px; border-bottom:1px solid var(--border); cursor:pointer; gap:10px; transition:background 0.15s; }
-.namaz-row:last-child{ border-bottom:none; }
-.namaz-row.cur-namaz{ background:var(--hi-bg); border-left:3px solid var(--hi-brd); }
-.namaz-row.cur-namaz .namaz-nm{ color:var(--accent); font-weight:600; }
-.namaz-nm{ flex:1; font-size:14px; }
-.opt-lbl{ color:var(--teal); }
-.namaz-t{ font-size:11px; color:var(--muted); }
-.namaz-t.cur{ color:var(--gold); font-weight:600; }
-.n-badge{ font-size:11px; padding:3px 10px; border-radius:20px; font-weight:500; flex-shrink:0; }
-.st-pending{ background:rgba(107,138,112,0.15); color:var(--muted); }
-.st-prayed{ background:rgba(78,201,176,0.15); color:var(--green); }
-.st-missed{ background:rgba(224,92,92,0.15); color:var(--red); }
-.pulse{ width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; animation:pulse 1.4s infinite; }
-@keyframes pulse{ 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.35;transform:scale(0.65)} }
-.namaz-count{ font-size:11px; color:var(--accent); font-weight:600; letter-spacing:0; text-transform:none; }
-.missed-count{ font-size:11px; color:var(--red); font-weight:600; letter-spacing:0; text-transform:none; }
-.sec-hdr-right{ display:flex; gap:8px; align-items:center; }
-.city-row{ display:flex; gap:8px; margin-bottom:10px; }
-.city-input{ flex:1; background:var(--card); border:1px solid var(--border); color:var(--text); font-size:12px; padding:8px 12px; border-radius:10px; outline:none; }
-.city-input:focus{ border-color:var(--accent); }
-.city-btn{ background:var(--accent); border:none; color:#000; font-size:12px; font-weight:700; padding:8px 14px; border-radius:10px; cursor:pointer; }
+/* ══ DHIKR ══ */
+#page-dhikr{padding:20px 16px;gap:0;}
+.page-title{font-family:Georgia,serif;font-size:20px;font-weight:700;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
+.dlist{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.drow{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.drow:last-child{border-bottom:none;}
+.dlbl{flex:1;min-width:120px;}
+.dar{font-family:Georgia,serif;font-size:13px;line-height:1.4;word-break:break-word;}
+.dme{font-size:10px;color:var(--muted);font-style:italic;margin-top:2px;line-height:1.4;word-break:break-word;}
+.done-row .dar{color:var(--muted);text-decoration:line-through;}
+.dctr{display:flex;align-items:center;background:var(--card2);border:1px solid var(--border);border-radius:12px;overflow:hidden;flex-shrink:0;}
+.db{background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;-webkit-user-select:none;user-select:none;}
+.db:active{background:rgba(255,255,255,0.05);}
+.dvw{display:flex;flex-direction:column;align-items:center;min-width:42px;border-left:1px solid var(--border);border-right:1px solid var(--border);padding:4px 2px;}
+.dv{font-family:Georgia,serif;font-size:16px;font-weight:700;color:var(--gold);line-height:1;}
+.dv.done{color:var(--green);}
+.dtg{font-size:9px;color:var(--muted);margin-top:1px;}
+.dreset{text-align:center;padding:20px 0 4px;}
+.rbtn{background:none;border:1px solid var(--border);color:var(--muted);font-size:11px;padding:6px 18px;border-radius:20px;cursor:pointer;}
+.cbox{display:none;margin:8px 0 0;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;font-size:13px;}
+.cbox.vis{display:block;}
+.cacts{display:flex;gap:8px;justify-content:center;margin-top:10px;}
+.cyes{background:rgba(224,92,92,0.12);border:1px solid var(--red);color:var(--red);padding:5px 18px;border-radius:20px;font-size:12px;cursor:pointer;}
+.cno{background:none;border:1px solid var(--border);color:var(--muted);padding:5px 18px;border-radius:20px;font-size:12px;cursor:pointer;}
 
-/* TASBIH */
-.tasbih-page{ display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; padding:16px; gap:14px; }
-.tsb-selector{ width:100%; }
-.tsb-select-label{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; text-align:center; }
-.tsb-pills{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
-.tsb-pill{ background:var(--card); border:1px solid var(--border); color:var(--muted); font-size:12px; padding:5px 14px; border-radius:20px; cursor:pointer; }
-.tsb-pill.active{ border-color:var(--accent); color:var(--accent); background:var(--hi-bg); }
+/* ══ TASBIH ══ */
+#page-tasbih{padding:20px 16px;gap:14px;align-items:center;justify-content:center;}
+.tsb-title{font-family:Georgia,serif;font-size:20px;font-weight:700;text-align:center;width:100%;}
+.tsb-pills-wrap{width:100%;}
+.tsb-pills-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;text-align:center;margin-bottom:8px;}
+.tsb-pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+.tpill{background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:5px 13px;border-radius:20px;cursor:pointer;transition:all 0.15s;}
+.tpill.active{background:var(--hi);border-color:var(--accent);color:var(--accent);}
+.tsb-custom{width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;}
+.tsb-custom-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
+.tsb-custom-row{display:flex;gap:8px;}
+.tsb-input{flex:1;background:var(--card2);border:1px solid var(--border);color:var(--text);font-size:13px;padding:8px 11px;border-radius:10px;outline:none;}
+.tsb-input:focus{border-color:var(--accent);}
+.tsb-use{background:var(--accent);border:none;color:#000;font-size:12px;font-weight:700;padding:8px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;}
+.tsb-info{text-align:center;}
+.tsb-name{font-family:Georgia,serif;font-size:15px;color:var(--text);}
+.tsb-meaning{font-size:11px;color:var(--muted);font-style:italic;margin-top:2px;}
+.tsb-circle{width:185px;height:185px;border-radius:50%;background:var(--hi);border:2px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.08s,background 0.1s;-webkit-user-select:none;user-select:none;gap:4px;}
+.tsb-circle:active{transform:scale(0.92);background:rgba(61,214,181,0.15);}
+.tsb-num{font-family:Georgia,serif;font-size:64px;font-weight:700;color:var(--accent);line-height:1;}
+.tsb-tap-lbl{font-size:10px;color:var(--muted);letter-spacing:0.5px;}
+.tsb-tgt{font-size:11px;color:var(--muted);}
+.tsb-btns{display:flex;gap:10px;}
+.tsb-btn{background:var(--card);border:1px solid var(--border);color:var(--text);font-size:12px;padding:8px 22px;border-radius:20px;cursor:pointer;}
+.tsb-btn.red{border-color:rgba(224,92,92,0.3);color:var(--red);}
 
-/* Custom tasbih input */
-.tsb-custom-area{ width:100%; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px 14px; }
-.tsb-custom-label{ font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
-.tsb-custom-row{ display:flex; gap:8px; align-items:center; }
-.tsb-custom-input{ flex:1; background:var(--bg); border:1px solid var(--border); color:var(--text); font-size:13px; padding:7px 10px; border-radius:8px; outline:none; }
-.tsb-custom-input:focus{ border-color:var(--accent); }
-.tsb-custom-btn{ background:var(--accent); border:none; color:#000; font-size:12px; font-weight:700; padding:7px 14px; border-radius:8px; cursor:pointer; white-space:nowrap; }
+/* ══ CALENDAR — full page immersive ══ */
+#page-calendar{padding:0;gap:0;background:var(--bg);}
+.cal-hero{padding:28px 20px 20px;background:linear-gradient(160deg,#0f2420 0%,var(--bg) 100%);flex-shrink:0;}
+.cal-hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.cal-month-name{font-family:Georgia,serif;font-size:28px;font-weight:700;color:var(--text);}
+.cal-year{font-size:13px;color:var(--muted);margin-top:2px;}
+.cal-nav-row{display:flex;gap:8px;}
+.cal-nav{background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background 0.15s;}
+.cal-nav:active{background:rgba(255,255,255,0.12);}
+.cal-stats{display:flex;gap:10px;margin-top:16px;}
+.cal-stat{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:10px 12px;text-align:center;}
+.cal-stat-val{font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--accent);}
+.cal-stat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+.cal-body{flex:1;padding:16px 16px 20px;}
+.cal-day-row{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-bottom:6px;}
+.cdlbl{text-align:center;font-size:9px;color:var(--muted);letter-spacing:0.8px;padding:0 0 8px;text-transform:uppercase;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cc{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:var(--muted);position:relative;cursor:default;}
+.cc.has-data{color:var(--text);}
+.cc.today{background:var(--hi);color:var(--accent);font-weight:700;border:1px solid rgba(61,214,181,0.4);}
+.cc.empty{opacity:0;pointer-events:none;}
+.cc-num{font-size:13px;line-height:1;}
+.cc-dot{width:5px;height:5px;border-radius:50%;margin-top:3px;}
+.cc-dot.dg{background:var(--green);}
+.cc-dot.dr{background:var(--red);}
+.cc-dot.dm{background:#444;}
+.cal-legend{display:flex;gap:16px;justify-content:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
+.cal-legend span{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);}
+.ldot{width:7px;height:7px;border-radius:50%;display:inline-block;}
 
-.tsb-name{ font-family:Georgia,serif; font-size:16px; color:var(--text); text-align:center; }
-.tsb-meaning{ font-size:12px; color:var(--muted); text-align:center; font-style:italic; }
-.tsb-tap{ width:190px; height:190px; border-radius:50%; background:var(--hi-bg); border:3px solid var(--hi-brd); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 0.08s,background 0.08s; -webkit-user-select:none; user-select:none; flex-direction:column; gap:4px; }
-.tsb-tap:active{ transform:scale(0.93); background:rgba(78,201,176,0.18); }
-.tsb-num{ font-family:Georgia,serif; font-size:68px; font-weight:700; color:var(--accent); line-height:1; }
-.tsb-tap-lbl{ font-size:12px; color:var(--muted); }
-.tsb-tgt-lbl{ font-size:13px; color:var(--muted); }
-.tsb-btns{ display:flex; gap:12px; }
-.tsb-btn{ background:var(--card); border:1px solid var(--border); color:var(--text); font-size:12px; padding:8px 20px; border-radius:20px; cursor:pointer; }
-.tsb-btn.danger{ border-color:rgba(224,92,92,0.4); color:var(--red); }
-
-/* CALENDAR */
-.cal-page{ padding:16px 12px 20px; }
-.cal-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-.cal-title{ font-family:Georgia,serif; font-size:16px; font-weight:700; }
-.cal-nav{ background:none; border:1px solid var(--border); color:var(--text); width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; }
-.cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
-.cal-day-label{ text-align:center; font-size:10px; color:var(--muted); padding-bottom:4px; }
-.cal-cell{ aspect-ratio:1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:12px; background:var(--card2); border:1px solid var(--border); }
-.cal-cell.today{ border-color:var(--accent); color:var(--accent); font-weight:700; }
-.cal-cell.empty{ background:transparent; border-color:transparent; }
-.cal-dots{ display:flex; gap:2px; margin-top:2px; }
-.cal-dot{ width:4px; height:4px; border-radius:50%; }
-.dot-green{ background:var(--green); }
-.dot-red{ background:var(--red); }
-.dot-grey{ background:var(--muted); }
-.cal-legend{ display:flex; gap:14px; justify-content:center; margin-top:10px; font-size:11px; color:var(--muted); flex-wrap:wrap; }
-.cal-legend span{ display:flex; align-items:center; gap:4px; }
-
-/* JOURNAL */
-.journal-page{ padding:12px 12px 20px; }
-.journal-input-area{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:10px; }
-.journal-date-label{ font-size:11px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; }
-.journal-textarea{ width:100%; background:transparent; border:none; color:var(--text); font-size:14px; line-height:1.6; resize:none; outline:none; min-height:90px; }
-.journal-save{ display:block; width:100%; background:var(--accent); border:none; color:#000; font-size:13px; font-weight:700; padding:10px; border-radius:10px; cursor:pointer; margin-bottom:12px; }
-.journal-entries{ display:flex; flex-direction:column; gap:10px; }
-.journal-entry{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 14px; }
-.je-date{ font-size:10px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
-.je-text{ font-size:13px; line-height:1.6; color:var(--text); white-space:pre-wrap; }
-.je-del{ background:none; border:none; color:var(--red); font-size:11px; cursor:pointer; margin-top:8px; opacity:0.7; }
-.journal-empty{ text-align:center; color:var(--muted); font-size:13px; padding:30px; font-style:italic; }
+/* ══ JOURNAL — beautiful writer ══ */
+#page-journal{padding:0;gap:0;}
+.j-top{padding:24px 20px 0;flex-shrink:0;}
+.j-top-date{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.j-top-title{font-family:Georgia,serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:18px;}
+.j-compose{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin:0 16px;flex-shrink:0;}
+.j-compose-header{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;border-bottom:1px solid var(--border);}
+.j-compose-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);opacity:0.6;}
+.j-compose-hint{font-size:11px;color:var(--muted);font-style:italic;}
+.j-ta{width:100%;background:transparent;border:none;color:var(--text);font-size:15px;line-height:1.8;resize:none;outline:none;min-height:110px;padding:14px 16px;font-family:Georgia,serif;}
+.j-ta::placeholder{color:var(--muted);font-style:italic;}
+.j-compose-footer{display:flex;justify-content:flex-end;padding:10px 14px 12px;border-top:1px solid var(--border);}
+.j-save{background:var(--accent);border:none;color:#000;font-size:12px;font-weight:700;padding:8px 20px;border-radius:20px;cursor:pointer;letter-spacing:0.3px;}
+.j-divider{display:flex;align-items:center;gap:12px;padding:16px 20px;flex-shrink:0;}
+.j-divider-line{flex:1;height:1px;background:var(--border);}
+.j-divider-text{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap;}
+.j-entries{padding:0 16px 24px;display:flex;flex-direction:column;gap:10px;}
+.je{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.je-header{padding:12px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.je-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0.5;flex-shrink:0;}
+.je-d{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;}
+.je-body{padding:12px 16px;}
+.je-t{font-family:Georgia,serif;font-size:14px;line-height:1.7;color:var(--text);white-space:pre-wrap;}
+.je-footer{padding:8px 16px 12px;display:flex;justify-content:flex-end;}
+.je-del{background:none;border:none;color:var(--muted);font-size:10px;cursor:pointer;letter-spacing:0.3px;}
+.je-del:hover{color:var(--red);}
+.j-empty{text-align:center;color:var(--muted);font-size:13px;padding:32px 20px;font-family:Georgia,serif;font-style:italic;}
 
 /* MODAL */
-.modal-ov{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:200; align-items:flex-end; justify-content:center; }
-.modal-ov.open{ display:flex; }
-.modal{ background:var(--card); border-radius:20px 20px 0 0; width:100%; max-width:430px; padding:20px 20px 48px; max-height:88vh; overflow-y:auto; scrollbar-width:none; }
-.modal::-webkit-scrollbar{ display:none; }
-.modal-title{ font-family:Georgia,serif; font-size:16px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; }
-.modal-close{ background:rgba(255,255,255,0.07); border:none; color:var(--text); width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.m-item{ background:var(--card2); border:1px solid var(--border); border-radius:10px; padding:12px 14px; margin-bottom:10px; }
-.m-item label{ display:block; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; margin-top:8px; }
-.m-item label:first-child{ margin-top:0; }
-.m-item input{ width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); font-size:13px; padding:8px 10px; border-radius:7px; outline:none; }
-.m-item input[type=number]{ width:80px; }
-.m-item input:focus{ border-color:var(--accent); }
-.m-actions{ margin-top:10px; }
-.del-btn{ background:rgba(224,92,92,0.1); border:1px solid rgba(224,92,92,0.3); color:var(--red); font-size:11px; padding:4px 14px; border-radius:14px; cursor:pointer; }
-.add-btn{ display:block; width:100%; background:rgba(86,201,160,0.07); border:1px dashed var(--teal); color:var(--teal); font-size:13px; padding:10px; border-radius:10px; cursor:pointer; margin-top:4px; text-align:center; }
-.save-btn{ display:block; width:100%; background:var(--accent); border:none; color:#000; font-size:14px; font-weight:700; padding:12px; border-radius:10px; cursor:pointer; margin-top:14px; }
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:200;align-items:flex-end;justify-content:center;}
+.mov.open{display:flex;}
+.modal{background:var(--card);border-radius:22px 22px 0 0;width:100%;max-width:430px;padding:20px 18px 48px;max-height:88vh;overflow-y:auto;scrollbar-width:none;}
+.modal::-webkit-scrollbar{display:none;}
+.mtitle{font-family:Georgia,serif;font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.mclose{background:var(--card2);border:none;color:var(--text);width:26px;height:26px;border-radius:50%;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.mi{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;}
+.mi label{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;margin-top:8px;}
+.mi label:first-child{margin-top:0;}
+.mi input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:13px;padding:7px 10px;border-radius:8px;outline:none;}
+.mi input[type=number]{width:75px;}
+.mi input:focus{border-color:var(--accent);}
+.mi-del{margin-top:8px;}
+.del-b{background:rgba(224,92,92,0.08);border:1px solid rgba(224,92,92,0.25);color:var(--red);font-size:11px;padding:4px 12px;border-radius:12px;cursor:pointer;}
+.add-b{display:block;width:100%;background:rgba(61,214,181,0.06);border:1px dashed rgba(61,214,181,0.3);color:var(--accent);font-size:13px;padding:10px;border-radius:12px;cursor:pointer;margin-top:4px;text-align:center;}
+.sav-b{display:block;width:100%;background:var(--accent);border:none;color:#000;font-size:14px;font-weight:700;padding:12px;border-radius:12px;cursor:pointer;margin-top:12px;letter-spacing:0.3px;}
 </style>
 </head>
 <body>
@@ -212,84 +213,74 @@ body{ background:var(--bg); color:var(--text); font-family:-apple-system,sans-se
 
 <!-- HOME -->
 <div class="page active" id="page-home">
-  <div class="home-top">
-    <div class="home-date-row">
-      <div>
-        <div class="home-date-main" id="dateDisplay"></div>
-        <div class="home-daytype" id="dayType"></div>
-        <div class="home-sub" id="homeSubLine"></div>
-      </div>
-      <div>
-        <div class="home-clock-big" id="homeClock"></div>
-        <div class="home-clock-sec" id="homeClockSec"></div>
-      </div>
+  <div class="home-header">
+    <div>
+      <div class="home-date-main" id="dateDisplay"></div>
+      <div class="home-dtype" id="dayType"></div>
+      <div class="home-sub" id="homeSubLine"></div>
+    </div>
+    <div>
+      <div class="clock-hm" id="homeClock"></div>
+      <div class="clock-s" id="homeClockSec"></div>
     </div>
   </div>
 
-  <div class="home-cards">
-    <div class="hcard">
-      <div class="hcard-label">Next Prayer</div>
-      <div class="hcard-val" id="cdTime">--:--</div>
-      <div class="hcard-sub" id="cdPrayer">—</div>
-    </div>
-    <div class="hcard">
-      <div class="hcard-label">Streak</div>
-      <div class="hcard-val">🔥 <span id="streakNum">0</span></div>
-      <div class="hcard-sub" id="namazCount">0/5 prayed</div>
+  <!-- Quote ABOVE namaz -->
+  <div class="quote-block">
+    <div class="qm">"</div>
+    <div>
+      <div class="qt" id="quoteText"></div>
+      <div class="qs" id="quoteSrc"></div>
     </div>
   </div>
 
-  <div class="home-namaz" style="margin-top:10px;">
-    <div class="home-namaz-inner">
-      <div class="hnam-label">
-        <span>🕌 Namaz</span>
-        <span id="missedCount" style="color:var(--red);font-size:11px;"></span>
-      </div>
-      <div class="hnam-pills" id="homePills"></div>
-      <div class="prog-bar"><div class="prog-fill" id="namazProgress"></div></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-lbl">Next Prayer</div>
+      <div class="card-val" id="cdTime">--:--</div>
+      <div class="card-sub" id="cdPrayer">Locating...</div>
+    </div>
+    <div class="card">
+      <div class="card-lbl">Prayer Streak</div>
+      <div class="card-val">🔥 <span id="streakNum">0</span></div>
+      <div class="card-sub" id="namazCount">0 / 5 prayed</div>
     </div>
   </div>
 
-  <div class="home-tasks" style="margin-top:10px;">
-    <div class="home-tasks-inner">
-      <div class="home-tasks-hdr">
-        <span>✅ Daily Tasks</span>
-        <button class="edit-btn" onclick="openTaskModal()">✏️ Edit</button>
-      </div>
-      <div id="homeTaskList"></div>
+  <div class="namaz-block">
+    <div class="block-top">
+      <div class="block-title">Namaz</div>
+      <div class="missed-lbl" id="missedCount"></div>
     </div>
+    <div class="pills" id="homePills"></div>
+    <div class="pbar"><div class="pfill" id="namazProgress"></div></div>
   </div>
 
-  <div class="home-quote" style="margin-top:10px;">
-    <div class="home-quote-inner">
-      <div class="qmark">"</div>
-      <div>
-        <div class="qtext" id="quoteText"></div>
-        <div class="qsrc" id="quoteSrc"></div>
-      </div>
+  <div class="tasks-block">
+    <div class="tasks-hdr">
+      <div class="tasks-hdr-title">Daily Tasks</div>
+      <button class="edt" onclick="openTaskModal()">Edit</button>
     </div>
+    <div id="homeTaskList"></div>
   </div>
 </div>
 
-<!-- DHIKR PAGE (no namaz) -->
+<!-- DHIKR -->
 <div class="page" id="page-dhikr">
-  <div class="page-inner">
-    <div class="section">
-      <div class="sec-hdr">
-        <span>📿 Dhikr</span>
-        <button class="edit-btn" onclick="openDhikrModal()">✏️ Edit</button>
-      </div>
-      <div id="dhikrList"></div>
-    </div>
-    <div class="reset-wrap" style="margin-top:4px;">
-      <div style="font-size:10px;color:var(--muted);margin-bottom:8px;">Resets automatically at midnight 🌙</div>
-      <button class="reset-btn" onclick="showConfirm()">↺ Manual Reset</button>
-      <div class="confirm-box" id="confirmBox">
-        Reset all items for today?
-        <div class="confirm-actions">
-          <button class="cy" onclick="doReset()">Yes, Reset</button>
-          <button class="cn" onclick="hideConfirm()">Cancel</button>
-        </div>
+  <div class="page-title" style="padding:20px 16px 0;">
+    Dhikr
+    <button class="edt" onclick="openDhikrModal()">Edit</button>
+  </div>
+  <div style="padding:16px 16px 0;">
+    <div class="dlist" id="dhikrList"></div>
+  </div>
+  <div class="dreset">
+    <button class="rbtn" onclick="showConfirm()">Reset today</button>
+    <div class="cbox" id="confirmBox">
+      Reset all items for today?
+      <div class="cacts">
+        <button class="cyes" onclick="doReset()">Reset</button>
+        <button class="cno" onclick="hideConfirm()">Cancel</button>
       </div>
     </div>
   </div>
@@ -297,90 +288,123 @@ body{ background:var(--bg); color:var(--text); font-family:-apple-system,sans-se
 
 <!-- TASBIH -->
 <div class="page" id="page-tasbih">
-  <div class="tasbih-page">
-    <!-- Selector: saved dhikr + custom -->
-    <div class="tsb-selector">
-      <div class="tsb-select-label">Select or type your own</div>
-      <div class="tsb-pills" id="tsbPills"></div>
+  <div class="tsb-title">Tasbih</div>
+  <div class="tsb-pills-wrap">
+    <div class="tsb-pills-lbl">From your dhikr</div>
+    <div class="tsb-pills" id="tsbPills"></div>
+  </div>
+  <div class="tsb-custom">
+    <div class="tsb-custom-lbl">Custom — type without saving</div>
+    <div class="tsb-custom-row">
+      <input class="tsb-input" id="tsbCustomInput" placeholder="e.g. Astaghfirullah...">
+      <button class="tsb-use" onclick="applyCustomTsb()">Use</button>
     </div>
-
-    <!-- Custom dhikr input -->
-    <div class="tsb-custom-area">
-      <div class="tsb-custom-label">Custom Dhikr (without saving)</div>
-      <div class="tsb-custom-row">
-        <input class="tsb-custom-input" id="tsbCustomInput" placeholder="e.g. Astaghfirullah...">
-        <button class="tsb-custom-btn" onclick="applyCustomTsb()">Use</button>
-      </div>
-    </div>
-
+  </div>
+  <div class="tsb-info">
     <div class="tsb-name" id="tsbName"></div>
     <div class="tsb-meaning" id="tsbMeaning"></div>
-    <div class="tsb-tap" onclick="tsbTap()">
-      <div class="tsb-num" id="tsbCount">0</div>
-      <div class="tsb-tap-lbl">tap to count</div>
-    </div>
-    <div class="tsb-tgt-lbl" id="tsbTarget"></div>
-    <div class="tsb-btns">
-      <button class="tsb-btn" onclick="tsbUndo()">↩ Undo</button>
-      <button class="tsb-btn danger" onclick="tsbReset()">↺ Reset</button>
-    </div>
+  </div>
+  <div class="tsb-circle" onclick="tsbTap()">
+    <div class="tsb-num" id="tsbCount">0</div>
+    <div class="tsb-tap-lbl">tap to count</div>
+  </div>
+  <div class="tsb-tgt" id="tsbTarget"></div>
+  <div class="tsb-btns">
+    <button class="tsb-btn" onclick="tsbUndo()">↩ Undo</button>
+    <button class="tsb-btn red" onclick="tsbReset()">↺ Reset</button>
   </div>
 </div>
 
 <!-- CALENDAR -->
 <div class="page" id="page-calendar">
-  <div class="cal-page">
-    <div class="cal-header">
-      <button class="cal-nav" onclick="calPrev()">‹</button>
-      <div class="cal-title" id="calTitle"></div>
-      <button class="cal-nav" onclick="calNext()">›</button>
+  <div class="cal-hero">
+    <div class="cal-hero-top">
+      <div>
+        <div class="cal-month-name" id="calMonthName"></div>
+        <div class="cal-year" id="calYear"></div>
+      </div>
+      <div class="cal-nav-row">
+        <button class="cal-nav" onclick="calPrev()">‹</button>
+        <button class="cal-nav" onclick="calNext()">›</button>
+      </div>
     </div>
+    <div class="cal-stats" id="calStats"></div>
+  </div>
+  <div class="cal-body">
+    <div class="cal-day-row" id="calDayRow"></div>
     <div class="cal-grid" id="calGrid"></div>
     <div class="cal-legend">
-      <span><span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span> All 5</span>
-      <span><span style="width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block"></span> Missed</span>
-      <span><span style="width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block"></span> Partial</span>
+      <span><span class="ldot" style="background:var(--green)"></span>All 5 prayed</span>
+      <span><span class="ldot" style="background:var(--red)"></span>Missed</span>
+      <span><span class="ldot" style="background:#444"></span>Partial</span>
     </div>
   </div>
 </div>
 
 <!-- JOURNAL -->
 <div class="page" id="page-journal">
-  <div class="journal-page">
-    <div class="journal-input-area">
-      <div class="journal-date-label" id="journalDateLabel"></div>
-      <textarea class="journal-textarea" id="journalTextarea" placeholder="Write your dua, reflection or note..."></textarea>
-    </div>
-    <button class="journal-save" onclick="saveJournalEntry()">💾 Save Entry</button>
-    <div class="journal-entries" id="journalEntries"></div>
+  <div class="j-top">
+    <div class="j-top-date" id="journalDateLabel"></div>
+    <div class="j-top-title">Dua &amp; Reflections</div>
   </div>
+  <div class="j-compose" style="margin-bottom:0;">
+    <div class="j-compose-header">
+      <div class="j-compose-dot"></div>
+      <div class="j-compose-hint">What's on your heart today?</div>
+    </div>
+    <textarea class="j-ta" id="journalTextarea" placeholder="Write your dua, gratitude, or reflection..."></textarea>
+    <div class="j-compose-footer">
+      <button class="j-save" onclick="saveJournalEntry()">Save</button>
+    </div>
+  </div>
+  <div class="j-divider">
+    <div class="j-divider-line"></div>
+    <div class="j-divider-text">Previous entries</div>
+    <div class="j-divider-line"></div>
+  </div>
+  <div class="j-entries" id="journalEntries"></div>
 </div>
 
 <!-- NAV -->
-<nav class="nav-tabs">
-  <button class="nav-tab active" onclick="showPage('home',this)"><span class="ti">🏠</span>Home</button>
-  <button class="nav-tab" onclick="showPage('dhikr',this)"><span class="ti">📿</span>Dhikr</button>
-  <button class="nav-tab" onclick="showPage('tasbih',this)"><span class="ti">🔢</span>Tasbih</button>
-  <button class="nav-tab" onclick="showPage('calendar',this)"><span class="ti">📊</span>Calendar</button>
-  <button class="nav-tab" onclick="showPage('journal',this)"><span class="ti">📝</span>Journal</button>
+<nav class="nav">
+  <button class="nt active" onclick="showPage('home',this)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Home</span>
+  </button>
+  <button class="nt" onclick="showPage('dhikr',this)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>
+    <span>Dhikr</span>
+  </button>
+  <button class="nt" onclick="showPage('tasbih',this)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/></svg>
+    <span>Tasbih</span>
+  </button>
+  <button class="nt" onclick="showPage('calendar',this)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+    <span>Calendar</span>
+  </button>
+  <button class="nt" onclick="showPage('journal',this)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+    <span>Journal</span>
+  </button>
 </nav>
 </div>
 
 <!-- MODALS -->
-<div class="modal-ov" id="dhikrModal">
+<div class="mov" id="dhikrModal">
   <div class="modal">
-    <div class="modal-title">Edit Dhikr <button class="modal-close" onclick="closeDhikrModal()">✕</button></div>
+    <div class="mtitle">Edit Dhikr <button class="mclose" onclick="closeDhikrModal()">✕</button></div>
     <div id="dhikrEditList"></div>
-    <button class="add-btn" onclick="addDhikrItem()">+ Add Dhikr</button>
-    <button class="save-btn" onclick="saveDhikr()">Save Changes</button>
+    <button class="add-b" onclick="addDhikrItem()">+ Add Dhikr</button>
+    <button class="sav-b" onclick="saveDhikr()">Save Changes</button>
   </div>
 </div>
-<div class="modal-ov" id="taskModal">
+<div class="mov" id="taskModal">
   <div class="modal">
-    <div class="modal-title">Edit Tasks <button class="modal-close" onclick="closeTaskModal()">✕</button></div>
+    <div class="mtitle">Edit Tasks <button class="mclose" onclick="closeTaskModal()">✕</button></div>
     <div id="taskEditList"></div>
-    <button class="add-btn" onclick="addTaskItem()">+ Add Task</button>
-    <button class="save-btn" onclick="saveTasksModal()">Save Changes</button>
+    <button class="add-b" onclick="addTaskItem()">+ Add Task</button>
+    <button class="sav-b" onclick="saveTasksModal()">Save Changes</button>
   </div>
 </div>
 
@@ -388,252 +412,216 @@ body{ background:var(--bg); color:var(--text); font-family:-apple-system,sans-se
 const QUOTES=[
   {text:"Verily, with hardship comes ease.",src:"Quran 94:5"},
   {text:"Allah does not burden a soul beyond that it can bear.",src:"Quran 2:286"},
-  {text:"And whoever puts their trust in Allah, He will be enough for them.",src:"Quran 65:3"},
+  {text:"Whoever puts their trust in Allah, He will be enough for them.",src:"Quran 65:3"},
   {text:"Indeed, Allah is with the patient.",src:"Quran 2:153"},
   {text:"Speak good or remain silent.",src:"Prophet Muhammad ﷺ"},
   {text:"The best of people are those most beneficial to people.",src:"Prophet Muhammad ﷺ"},
   {text:"Make things easy, do not make them difficult.",src:"Prophet Muhammad ﷺ"},
   {text:"None of you truly believes until he loves for his brother what he loves for himself.",src:"Prophet Muhammad ﷺ"},
-  {text:"Richness is being content with oneself.",src:"Prophet Muhammad ﷺ"},
   {text:"So remember Me; I will remember you.",src:"Quran 2:152"},
   {text:"My mercy encompasses all things.",src:"Quran 7:156"},
   {text:"Call upon Me; I will respond to you.",src:"Quran 40:60"},
   {text:"And He found you lost and guided you.",src:"Quran 93:7"},
   {text:"Every act of kindness is charity.",src:"Prophet Muhammad ﷺ"},
   {text:"Cleanliness is half of faith.",src:"Prophet Muhammad ﷺ"},
-  {text:"The most beloved deeds to Allah are those done consistently, even if small.",src:"Prophet Muhammad ﷺ"},
+  {text:"The most beloved deeds are those done consistently, even if small.",src:"Prophet Muhammad ﷺ"},
   {text:"Allah is beautiful and loves beauty.",src:"Prophet Muhammad ﷺ"},
   {text:"Do not lose hope in the mercy of Allah.",src:"Quran 39:53"},
-  {text:"Indeed, prayer prohibits immorality and wrongdoing.",src:"Quran 29:45"},
+  {text:"Prayer prohibits immorality and wrongdoing.",src:"Quran 29:45"},
   {text:"He knows what is in every heart.",src:"Quran 67:13"},
   {text:"Smile at your brother — it is charity.",src:"Prophet Muhammad ﷺ"},
   {text:"The strong man controls himself when angry.",src:"Prophet Muhammad ﷺ"},
   {text:"Whoever is not thankful to people is not thankful to Allah.",src:"Prophet Muhammad ﷺ"},
   {text:"Verily, the promise of Allah is truth.",src:"Quran 31:33"},
   {text:"Take benefit of five before five: youth, health, wealth, free time, and life.",src:"Prophet Muhammad ﷺ"},
+  {text:"Make du'a in a state of certainty that it will be answered.",src:"Prophet Muhammad ﷺ"},
 ];
 
-const NAMAZ_LIST=[
-  {id:'tahajjud',name:'Tahajjud',optional:true,apiKey:null},
-  {id:'fajr',name:'Fajr',optional:false,apiKey:'Fajr'},
-  {id:'zohar',name:'Zohar',optional:false,apiKey:'Dhuhr'},
-  {id:'asr',name:'Asr',optional:false,apiKey:'Asr'},
-  {id:'maghrib',name:'Maghrib',optional:false,apiKey:'Maghrib'},
-  {id:'isha',name:'Isha',optional:false,apiKey:'Isha'},
+const NL=[
+  {id:'tahajjud',name:'Tahajjud',opt:true,ak:null},
+  {id:'fajr',name:'Fajr',opt:false,ak:'Fajr'},
+  {id:'zohar',name:'Zohar',opt:false,ak:'Dhuhr'},
+  {id:'asr',name:'Asr',opt:false,ak:'Asr'},
+  {id:'maghrib',name:'Maghrib',opt:false,ak:'Maghrib'},
+  {id:'isha',name:'Isha',opt:false,ak:'Isha'},
 ];
-const DEFAULT_DHIKR=[
+const DD=[
   {id:'rabbi_inni',arabic:'Rabbi Inni Lima Anzalta Ilayya Min Khairin Faqir',meaning:'"My Lord, I am truly in great need of Your good"',target:100},
   {id:'subhanallah',arabic:'SubhanAllah',meaning:'Glory be to Allah',target:33},
   {id:'alhamdulillah',arabic:'Alhamdulillah',meaning:'All praise is due to Allah',target:33},
   {id:'allahuakbar',arabic:'Allahu Akbar',meaning:'Allah is the Greatest',target:34},
 ];
-const DEFAULT_TASKS=[
+const DT=[
   {id:'tahajjud_check',label:'Tahajjud prayer completed'},
   {id:'quran',label:'Quran recitation'},
   {id:'fasting',label:'Fasting / Sunnah fast'},
 ];
 
-const SK='dt_v8',STREAK_KEY='dt_streak_v2',HIST_KEY='dt_hist_v1',JOURNAL_KEY='dt_journal_v1',TSB_KEY='dt_tasbih_v1';
+const SK='dt_v9',SKS='dt_str2',SKH='dt_his1',SKJ='dt_jou1',SKT='dt_tsb1';
 
-function todayStr(){const d=new Date();return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
-function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
+function td(){const d=new Date();return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
+function yd(){const d=new Date();d.setDate(d.getDate()-1);return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
 
-function defaultState(dd,td){
-  dd=dd||DEFAULT_DHIKR;td=td||DEFAULT_TASKS;
-  const namaz={},dhikr={},tasks={};
-  NAMAZ_LIST.forEach(n=>namaz[n.id]='pending');
-  dd.forEach(d=>dhikr[d.id]=0);td.forEach(t=>tasks[t.id]=false);
-  return {date:todayStr(),namaz,dhikr,tasks,dhikrDefs:dd,taskDefs:td};
+function defState(dd,dt){
+  dd=dd||DD;dt=dt||DT;
+  const n={},dh={},tk={};
+  NL.forEach(x=>n[x.id]='pending');
+  dd.forEach(x=>dh[x.id]=0);dt.forEach(x=>tk[x.id]=false);
+  return {date:td(),namaz:n,dhikr:dh,tasks:tk,dhikrDefs:dd,taskDefs:dt};
 }
-function loadState(){
-  try{
-    const raw=localStorage.getItem(SK);if(!raw)return null;
-    const obj=JSON.parse(raw);
-    if(obj.date!==todayStr()){checkStreakOnNewDay(obj);saveHistory(obj);return defaultState(obj.dhikrDefs,obj.taskDefs);}
-    return obj;
-  }catch{return null;}
+function loadS(){
+  try{const r=localStorage.getItem(SK);if(!r)return null;const o=JSON.parse(r);if(o.date!==td()){streakCheck(o);histSave(o);return defState(o.dhikrDefs,o.taskDefs);}return o;}catch{return null;}
 }
-let state=loadState()||defaultState();
-if(!state.dhikrDefs)state.dhikrDefs=DEFAULT_DHIKR;
-if(!state.taskDefs)state.taskDefs=DEFAULT_TASKS;
-function saveState(){localStorage.setItem(SK,JSON.stringify(state));}
+let S=loadS()||defState();
+if(!S.dhikrDefs)S.dhikrDefs=DD;if(!S.taskDefs)S.taskDefs=DT;
+function save(){localStorage.setItem(SK,JSON.stringify(S));}
 
-// STREAK
-function loadStreak(){try{return JSON.parse(localStorage.getItem(STREAK_KEY))||{count:0,lastDay:''};}catch{return{count:0,lastDay:''};}}
-function saveStreak(s){localStorage.setItem(STREAK_KEY,JSON.stringify(s));}
-function checkStreakOnNewDay(old){
-  const s=loadStreak(),total=NAMAZ_LIST.filter(n=>!n.optional).length;
-  const prayed=NAMAZ_LIST.filter(n=>!n.optional&&old.namaz[n.id]==='prayed').length;
-  s.count=(prayed===total)?(s.lastDay===yesterdayStr()?s.count+1:1):0;
-  s.lastDay=todayStr();saveStreak(s);
+function loadStreak(){try{return JSON.parse(localStorage.getItem(SKS))||{c:0,d:''};}catch{return{c:0,d:''};}}
+function saveStreak(s){localStorage.setItem(SKS,JSON.stringify(s));}
+function streakCheck(old){
+  const s=loadStreak(),tot=NL.filter(x=>!x.opt).length;
+  const pr=NL.filter(x=>!x.opt&&old.namaz[x.id]==='prayed').length;
+  s.c=(pr===tot)?(s.d===yd()?s.c+1:1):0;s.d=td();saveStreak(s);
 }
-function renderStreak(){document.getElementById('streakNum').textContent=loadStreak().count;}
+function renderStreak(){document.getElementById('streakNum').textContent=loadStreak().c;}
 
-// HISTORY
-function loadHistory(){try{return JSON.parse(localStorage.getItem(HIST_KEY))||{};}catch{return{};}}
-function saveHistory(old){
-  const h=loadHistory(),total=NAMAZ_LIST.filter(n=>!n.optional).length;
-  const prayed=NAMAZ_LIST.filter(n=>!n.optional&&old.namaz[n.id]==='prayed').length;
-  const missed=NAMAZ_LIST.filter(n=>!n.optional&&old.namaz[n.id]==='missed').length;
-  h[old.date]={prayed,missed,total};localStorage.setItem(HIST_KEY,JSON.stringify(h));
+function loadHist(){try{return JSON.parse(localStorage.getItem(SKH))||{};}catch{return{};}}
+function histSave(old){
+  const h=loadHist(),tot=NL.filter(x=>!x.opt).length;
+  const pr=NL.filter(x=>!x.opt&&old.namaz[x.id]==='prayed').length;
+  const mi=NL.filter(x=>!x.opt&&old.namaz[x.id]==='missed').length;
+  h[old.date]={pr,mi,tot};localStorage.setItem(SKH,JSON.stringify(h));
 }
 
-// HIJRI
-function toHijri(date){
+function hijri(date){
   const JD=Math.floor((date.getTime()/86400000)+2440587.5);
   const l=JD-1948440+10632,n=Math.floor((l-1)/10631),l2=l-10631*n+354;
   const j=Math.floor((10985-l2)/5316)*Math.floor((50*l2)/17719)+Math.floor(l2/5670)*Math.floor((43*l2)/15238);
   const l3=l2-Math.floor((30-j)/15)*Math.floor((17719*j)/50)-Math.floor(j/16)*Math.floor((15238*j)/43)+29;
-  const month=Math.floor((24*l3)/709),day=l3-Math.floor((709*month)/24),year=30*n+j-30;
+  const mo=Math.floor((24*l3)/709),dy=l3-Math.floor((709*mo)/24),yr=30*n+j-30;
   const HM=['Muharram','Safar','Rabi al-Awwal','Rabi al-Thani','Jumada al-Ula','Jumada al-Akhirah','Rajab',"Sha'ban",'Ramadan','Shawwal',"Dhu al-Qi'dah",'Dhu al-Hijjah'];
-  return day+' '+HM[month-1]+' '+year+' AH';
+  return dy+' '+HM[mo-1]+' '+yr+' AH';
 }
 
-// PRAYER TIMES
-let prayerTimes={},ptLoaded=false,cityOverride='';
-function initPrayerTimes(){
-  const saved=localStorage.getItem('dt_city');
-  if(saved){cityOverride=saved;}
-  if(!navigator.geolocation){ptLoaded=true;renderNamaz();updateCountdown();return;}
-  navigator.geolocation.getCurrentPosition(
-    pos=>{fetchPT(pos.coords.latitude,pos.coords.longitude);if(!cityOverride)fetchCity(pos.coords.latitude,pos.coords.longitude);},
-    ()=>{ptLoaded=true;renderNamaz();updateCountdown();},{timeout:8000}
-  );
+let PT={},ptOK=false,city='';
+function initPT(){
+  const sv=localStorage.getItem('dt_city');if(sv)city=sv;
+  if(!navigator.geolocation){ptOK=true;renderNamaz();cdUpdate();return;}
+  navigator.geolocation.getCurrentPosition(p=>{fetchPT(p.coords.latitude,p.coords.longitude);if(!city)fetchCity(p.coords.latitude,p.coords.longitude);},()=>{ptOK=true;renderNamaz();cdUpdate();},{timeout:8000});
 }
 function fetchCity(lat,lon){
   fetch('https://nominatim.openstreetmap.org/reverse?lat='+lat+'&lon='+lon+'&format=json')
-    .then(r=>r.json()).then(d=>{
-      const a=d.address,city=a.city||a.town||a.village||a.county||'',cc=a.country_code?a.country_code.toUpperCase():'';
-      if(!cityOverride&&city){cityOverride=[city,cc].filter(Boolean).join(', ');updateHomeSubLine();}
-    }).catch(()=>{});
+    .then(r=>r.json()).then(d=>{const a=d.address,c=a.city||a.town||a.village||'',cc=a.country_code?a.country_code.toUpperCase():'';if(!city&&c){city=[c,cc].filter(Boolean).join(', ');subLine();}}).catch(()=>{});
 }
 function fetchPT(lat,lon){
   const d=new Date();
   fetch('https://api.aladhan.com/v1/timings/'+String(d.getDate()).padStart(2,'0')+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+d.getFullYear()+'?latitude='+lat+'&longitude='+lon+'&method=2')
-    .then(r=>r.json()).then(data=>{if(data.code===200)prayerTimes=data.data.timings;ptLoaded=true;renderNamaz();updateCountdown();})
-    .catch(()=>{ptLoaded=true;renderNamaz();updateCountdown();});
+    .then(r=>r.json()).then(x=>{if(x.code===200)PT=x.data.timings;ptOK=true;renderNamaz();cdUpdate();}).catch(()=>{ptOK=true;renderNamaz();cdUpdate();});
 }
-function toMin(s){if(!s)return 0;const[h,m]=s.split(' ')[0].split(':').map(Number);return h*60+m;}
-function fmtTime(key){const s=prayerTimes[key];if(!s)return'';const[h,m]=s.split(' ')[0].split(':').map(Number);return(h%12||12)+':'+(String(m).padStart(2,'0'))+(h>=12?' PM':' AM');}
-function getCurrentNamazId(){
-  if(!ptLoaded||!Object.keys(prayerTimes).length)return null;
-  const now=new Date(),nowMin=now.getHours()*60+now.getMinutes();
-  if(nowMin<toMin(prayerTimes.Fajr))return 'tahajjud';
-  const wins=[{id:'fajr',min:toMin(prayerTimes.Fajr)},{id:'zohar',min:toMin(prayerTimes.Dhuhr)},{id:'asr',min:toMin(prayerTimes.Asr)},{id:'maghrib',min:toMin(prayerTimes.Maghrib)},{id:'isha',min:toMin(prayerTimes.Isha)}];
-  for(let i=wins.length-1;i>=0;i--)if(nowMin>=wins[i].min)return wins[i].id;
-  return null;
+function tm(s){if(!s)return 0;const[h,m]=s.split(' ')[0].split(':').map(Number);return h*60+m;}
+function curNamaz(){
+  if(!ptOK||!Object.keys(PT).length)return null;
+  const now=new Date(),nm=now.getHours()*60+now.getMinutes();
+  if(nm<tm(PT.Fajr))return'tahajjud';
+  const w=[{id:'fajr',m:tm(PT.Fajr)},{id:'zohar',m:tm(PT.Dhuhr)},{id:'asr',m:tm(PT.Asr)},{id:'maghrib',m:tm(PT.Maghrib)},{id:'isha',m:tm(PT.Isha)}];
+  for(let i=w.length-1;i>=0;i--)if(nm>=w[i].m)return w[i].id;return null;
 }
-function updateCountdown(){
-  if(!ptLoaded||!Object.keys(prayerTimes).length){document.getElementById('cdPrayer').textContent='Locating...';document.getElementById('cdTime').textContent='--:--';return;}
-  const now=new Date(),nowMin=now.getHours()*60+now.getMinutes();
-  const order=[{name:'Fajr',key:'Fajr'},{name:'Zohar',key:'Dhuhr'},{name:'Asr',key:'Asr'},{name:'Maghrib',key:'Maghrib'},{name:'Isha',key:'Isha'}];
-  let nextName='',nextMin=Infinity;
-  for(const p of order){const pm=toMin(prayerTimes[p.key]);if(pm>nowMin&&pm<nextMin){nextMin=pm;nextName=p.name;}}
-  if(!nextName){nextName='Fajr (tomorrow)';nextMin=toMin(prayerTimes.Fajr)+24*60;}
-  const diff=nextMin-nowMin,h=Math.floor(diff/60),m=diff%60;
-  document.getElementById('cdPrayer').textContent=nextName;
+function cdUpdate(){
+  if(!ptOK||!Object.keys(PT).length){document.getElementById('cdPrayer').textContent='Locating...';document.getElementById('cdTime').textContent='--:--';return;}
+  const nm=new Date().getHours()*60+new Date().getMinutes();
+  const ord=[{n:'Fajr',k:'Fajr'},{n:'Zohar',k:'Dhuhr'},{n:'Asr',k:'Asr'},{n:'Maghrib',k:'Maghrib'},{n:'Isha',k:'Isha'}];
+  let nn='',nv=Infinity;
+  for(const p of ord){const v=tm(PT[p.k]);if(v>nm&&v<nv){nv=v;nn=p.n;}}
+  if(!nn){nn='Fajr (tmrw)';nv=tm(PT.Fajr)+1440;}
+  const d=nv-nm,h=Math.floor(d/60),m=d%60;
+  document.getElementById('cdPrayer').textContent=nn;
   document.getElementById('cdTime').textContent=h>0?h+'h '+m+'m':m+'m';
 }
 
-// HEADER
-const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MO=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DA=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const ORD=n=>n+(n%10===1&&n!==11?'st':n%10===2&&n!==12?'nd':n%10===3&&n!==13?'rd':'th');
-function updateHomeSubLine(){
-  const parts=['🌙 '+toHijri(new Date())];
-  if(cityOverride)parts.push('📍 '+cityOverride);
-  document.getElementById('homeSubLine').textContent=parts.join('  ');
+
+function subLine(){
+  const p=['🌙 '+hijri(new Date())];
+  if(city)p.push('📍 '+city);
+  document.getElementById('homeSubLine').textContent=p.join('  ');
 }
 function updateHeader(){
-  const now=new Date(),day=now.getDay(),isWeekend=day===0||day===6;
-  document.getElementById('dateDisplay').innerHTML=ORD(now.getDate())+' '+MONTHS[now.getMonth()]+' — <span class="day-name">'+DAYS[day]+'</span>';
-  const dt=document.getElementById('dayType');
-  dt.textContent=isWeekend?'Weekend':'Weekday';
-  dt.className='home-daytype '+(isWeekend?'weekend':'weekday');
+  const now=new Date(),dy=now.getDay(),we=dy===0||dy===6;
+  document.getElementById('dateDisplay').innerHTML=ORD(now.getDate())+' '+MO[now.getMonth()]+' — <span class="dn">'+DA[dy]+'</span>';
+  const dt=document.getElementById('dayType');dt.textContent=we?'Weekend':'Weekday';dt.className='home-dtype '+(we?'weekend':'weekday');
   const hh=String(now.getHours()).padStart(2,'0'),mm=String(now.getMinutes()).padStart(2,'0'),ss=String(now.getSeconds()).padStart(2,'0');
   document.getElementById('homeClock').textContent=hh+':'+mm;
   document.getElementById('homeClockSec').textContent=':'+ss;
-  document.getElementById('journalDateLabel').textContent=ORD(now.getDate())+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
-  updateHomeSubLine();
+  const now2=new Date();
+  document.getElementById('journalDateLabel').textContent=ORD(now2.getDate())+' '+MO[now2.getMonth()]+' '+now2.getFullYear();
+  subLine();
 }
 
-// MIDNIGHT
-let lastDate=todayStr();
-function checkMidnight(){
-  const cur=todayStr();
-  if(cur!==lastDate){
-    saveHistory(state);lastDate=cur;
-    state=defaultState(state.dhikrDefs,state.taskDefs);
-    saveState();prayerTimes={};ptLoaded=false;
-    initPrayerTimes();renderAll();setDailyQuote();renderCalendar();
-  }
+let lastD=td();
+function midCheck(){
+  const c=td();
+  if(c!==lastD){histSave(S);lastD=c;S=defState(S.dhikrDefs,S.taskDefs);save();PT={};ptOK=false;initPT();renderAll();setQuote();renderCal();}
 }
 
-// QUOTE
-function setDailyQuote(){
+function setQuote(){
   const d=new Date(),q=QUOTES[(d.getFullYear()*1000+d.getMonth()*32+d.getDate())%QUOTES.length];
   document.getElementById('quoteText').textContent=q.text;
   document.getElementById('quoteSrc').textContent='— '+q.src;
 }
 
-// NAMAZ (home pills only)
-function cycleStatus(s){return s==='pending'?'prayed':s==='prayed'?'missed':'pending';}
+function cycle(s){return s==='pending'?'prayed':s==='prayed'?'missed':'pending';}
 function renderNamaz(){
   const pills=document.getElementById('homePills');if(pills)pills.innerHTML='';
-  let prayed=0,missed=0;
-  const total=NAMAZ_LIST.filter(n=>!n.optional).length;
-  const curId=getCurrentNamazId();
-  NAMAZ_LIST.forEach(namaz=>{
-    const status=state.namaz[namaz.id];
-    if(!namaz.optional){if(status==='prayed')prayed++;if(status==='missed')missed++;}
+  let pr=0,mi=0;const tot=NL.filter(x=>!x.opt).length;const cur=curNamaz();
+  NL.forEach(x=>{
+    const st=S.namaz[x.id];if(!x.opt){if(st==='prayed')pr++;if(st==='missed')mi++;}
     if(pills){
-      const pill=document.createElement('div');pill.className='hnam-pill st-'+status+(namaz.id===curId?' cur':'');
-      pill.textContent=namaz.name+(namaz.optional?' ✦':'');
-      pill.onclick=()=>{state.namaz[namaz.id]=cycleStatus(state.namaz[namaz.id]);saveState();renderNamaz();};
-      pills.appendChild(pill);
+      const p=document.createElement('div');p.className='pill st-'+st+(x.id===cur?' cur':'');
+      p.textContent=x.name+(x.opt?' ✦':'');
+      p.onclick=()=>{S.namaz[x.id]=cycle(S.namaz[x.id]);save();renderNamaz();};
+      pills.appendChild(p);
     }
   });
-  const pct=Math.round((prayed/total)*100);
-  document.getElementById('namazProgress').style.width=pct+'%';
-  document.getElementById('namazCount').textContent=prayed+'/'+total+' prayed';
-  const mc=document.getElementById('missedCount');if(mc)mc.textContent=missed>0?missed+' missed':'';
+  document.getElementById('namazProgress').style.width=Math.round((pr/tot)*100)+'%';
+  document.getElementById('namazCount').textContent=pr+' / '+tot+' prayed';
+  const mc=document.getElementById('missedCount');if(mc)mc.textContent=mi>0?mi+' missed':'';
 }
 
-// DHIKR
 function renderDhikr(){
   const c=document.getElementById('dhikrList');c.innerHTML='';
-  state.dhikrDefs.forEach(d=>{
-    const count=state.dhikr[d.id]||0,done=count>=d.target;
-    const row=document.createElement('div');row.className='counter-row'+(done?' c-done':'');
-    const lbl=document.createElement('div');lbl.className='c-label'+(done?' c-done':'');
-    const ar=document.createElement('div');ar.className='c-arabic';ar.textContent=d.arabic;
-    const me=document.createElement('div');me.className='c-meaning';me.textContent=d.meaning;
-    lbl.appendChild(ar);lbl.appendChild(me);
-    const ctrl=document.createElement('div');ctrl.className='c-controls';
-    const minus=document.createElement('button');minus.className='c-btn';minus.textContent='−';
-    minus.onclick=e=>{e.stopPropagation();if((state.dhikr[d.id]||0)>0){state.dhikr[d.id]--;saveState();renderDhikr();}};
-    const vw=document.createElement('div');vw.className='c-val-wrap';
-    const val=document.createElement('div');val.className='c-val'+(done?' done':'');val.textContent=count;
-    const tgt=document.createElement('div');tgt.className='c-tgt';tgt.textContent='/ '+d.target;
-    vw.appendChild(val);vw.appendChild(tgt);
-    const plus=document.createElement('button');plus.className='c-btn';plus.textContent='+';
-    plus.onclick=e=>{e.stopPropagation();state.dhikr[d.id]=(state.dhikr[d.id]||0)+1;saveState();renderDhikr();};
-    ctrl.appendChild(minus);ctrl.appendChild(vw);ctrl.appendChild(plus);
-    row.appendChild(lbl);row.appendChild(ctrl);c.appendChild(row);
+  S.dhikrDefs.forEach(d=>{
+    const cnt=S.dhikr[d.id]||0,dn=cnt>=d.target;
+    const row=document.createElement('div');row.className='drow'+(dn?' done-row':'');
+    const lb=document.createElement('div');lb.className='dlbl';
+    const ar=document.createElement('div');ar.className='dar';ar.textContent=d.arabic;
+    const me=document.createElement('div');me.className='dme';me.textContent=d.meaning;
+    lb.appendChild(ar);lb.appendChild(me);
+    const ct=document.createElement('div');ct.className='dctr';
+    const mn=document.createElement('button');mn.className='db';mn.textContent='−';
+    mn.onclick=e=>{e.stopPropagation();if((S.dhikr[d.id]||0)>0){S.dhikr[d.id]--;save();renderDhikr();}};
+    const vw=document.createElement('div');vw.className='dvw';
+    const vl=document.createElement('div');vl.className='dv'+(dn?' done':'');vl.textContent=cnt;
+    const tg=document.createElement('div');tg.className='dtg';tg.textContent='/'+d.target;
+    vw.appendChild(vl);vw.appendChild(tg);
+    const pl=document.createElement('button');pl.className='db';pl.textContent='+';
+    pl.onclick=e=>{e.stopPropagation();S.dhikr[d.id]=(S.dhikr[d.id]||0)+1;save();renderDhikr();};
+    ct.appendChild(mn);ct.appendChild(vw);ct.appendChild(pl);
+    row.appendChild(lb);row.appendChild(ct);c.appendChild(row);
   });
-  renderTasbihPills();
+  renderTsbPills();
 }
 
-// TASKS
 function renderTasksIn(id){
   const c=document.getElementById(id);if(!c)return;c.innerHTML='';
-  state.taskDefs.forEach(t=>{
-    const done=!!state.tasks[t.id];
-    const row=document.createElement('div');row.className='home-task-row'+(done?' done':'');
-    const radio=document.createElement('div');radio.className='radio';
-    const lbl=document.createElement('div');lbl.className='home-task-lbl';lbl.textContent=t.label;
-    row.appendChild(radio);row.appendChild(lbl);
-    row.addEventListener('click',()=>{state.tasks[t.id]=!state.tasks[t.id];saveState();renderTasksIn(id);});
+  S.taskDefs.forEach(t=>{
+    const dn=!!S.tasks[t.id];
+    const row=document.createElement('div');row.className='trow'+(dn?' done':'');
+    const chk=document.createElement('div');chk.className='chk';
+    const lb=document.createElement('div');lb.className='tlbl';lb.textContent=t.label;
+    row.appendChild(chk);row.appendChild(lb);
+    row.addEventListener('click',()=>{S.tasks[t.id]=!S.tasks[t.id];save();renderTasksIn(id);});
     c.appendChild(row);
   });
 }
@@ -641,201 +629,192 @@ function renderTasks(){renderTasksIn('homeTaskList');}
 function renderAll(){updateHeader();renderStreak();renderNamaz();renderDhikr();renderTasks();}
 
 // TASBIH
-let tsbIndex=0; // -1 = custom mode
-let tsbCustomText='';
-let tsbCustomCount=0;
-
-function getTsbCounts(){try{return JSON.parse(localStorage.getItem(TSB_KEY))||{};}catch{return{};}}
-function saveTsbCounts(c){localStorage.setItem(TSB_KEY,JSON.stringify(c));}
-
-function renderTasbihPills(){
-  const pills=document.getElementById('tsbPills');if(!pills)return;pills.innerHTML='';
-  state.dhikrDefs.forEach((d,i)=>{
-    const p=document.createElement('div');p.className='tsb-pill'+(i===tsbIndex?' active':'');
-    p.textContent=d.arabic.length>22?d.arabic.substring(0,22)+'…':d.arabic;
-    p.onclick=()=>{tsbIndex=i;tsbCustomText='';document.getElementById('tsbCustomInput').value='';renderTasbih();};
-    pills.appendChild(p);
+let tsbIdx=0,tsbCustom='',tsbCustomCnt=0;
+function getTsb(){try{return JSON.parse(localStorage.getItem(SKT))||{};}catch{return{};}}
+function saveTsb(c){localStorage.setItem(SKT,JSON.stringify(c));}
+function renderTsbPills(){
+  const p=document.getElementById('tsbPills');if(!p)return;p.innerHTML='';
+  S.dhikrDefs.forEach((d,i)=>{
+    const el=document.createElement('div');el.className='tpill'+(i===tsbIdx&&!tsbCustom?' active':'');
+    el.textContent=d.arabic.length>20?d.arabic.substring(0,20)+'…':d.arabic;
+    el.onclick=()=>{tsbIdx=i;tsbCustom='';document.getElementById('tsbCustomInput').value='';renderTsb();};
+    p.appendChild(el);
   });
 }
-
 function applyCustomTsb(){
-  const val=document.getElementById('tsbCustomInput').value.trim();
-  if(!val)return;
-  tsbCustomText=val;
-  tsbCustomCount=0;
-  tsbIndex=-1;
-  // deactivate all pills
-  document.querySelectorAll('.tsb-pill').forEach(p=>p.classList.remove('active'));
-  renderTasbih();
+  const v=document.getElementById('tsbCustomInput').value.trim();if(!v)return;
+  tsbCustom=v;tsbCustomCnt=0;tsbIdx=-1;
+  document.querySelectorAll('.tpill').forEach(x=>x.classList.remove('active'));
+  renderTsb();
 }
-
-function renderTasbih(){
-  if(tsbIndex===-1){
-    // custom mode
-    document.getElementById('tsbName').textContent=tsbCustomText||'Custom Dhikr';
+function renderTsb(){
+  if(tsbCustom){
+    document.getElementById('tsbName').textContent=tsbCustom;
     document.getElementById('tsbMeaning').textContent='';
-    document.getElementById('tsbCount').textContent=tsbCustomCount;
+    document.getElementById('tsbCount').textContent=tsbCustomCnt;
     document.getElementById('tsbTarget').textContent='';
-    renderTasbihPills();
-    return;
+    renderTsbPills();return;
   }
-  const d=state.dhikrDefs[tsbIndex];if(!d)return;
-  const counts=getTsbCounts(),count=counts[d.id]||0;
+  if(tsbIdx<0||tsbIdx>=S.dhikrDefs.length)tsbIdx=0;
+  const d=S.dhikrDefs[tsbIdx];if(!d)return;
+  const c=getTsb(),cnt=c[d.id]||0;
   document.getElementById('tsbName').textContent=d.arabic;
   document.getElementById('tsbMeaning').textContent=d.meaning;
-  document.getElementById('tsbCount').textContent=count;
-  document.getElementById('tsbTarget').textContent=count>=d.target?'✅ Target reached!':'Target: '+d.target;
-  renderTasbihPills();
+  document.getElementById('tsbCount').textContent=cnt;
+  document.getElementById('tsbTarget').textContent=cnt>=d.target?'✅ Target reached':'Target: '+d.target;
+  renderTsbPills();
 }
-
 function tsbTap(){
-  if(tsbIndex===-1){
-    tsbCustomCount++;
-    document.getElementById('tsbCount').textContent=tsbCustomCount;
-    if(navigator.vibrate)navigator.vibrate(8);
-    return;
-  }
-  const d=state.dhikrDefs[tsbIndex];if(!d)return;
-  const counts=getTsbCounts();counts[d.id]=(counts[d.id]||0)+1;
-  state.dhikr[d.id]=counts[d.id];saveState();saveTsbCounts(counts);
-  renderTasbih();renderDhikr();
+  if(tsbCustom){tsbCustomCnt++;document.getElementById('tsbCount').textContent=tsbCustomCnt;if(navigator.vibrate)navigator.vibrate(8);return;}
+  const d=S.dhikrDefs[tsbIdx];if(!d)return;
+  const c=getTsb();c[d.id]=(c[d.id]||0)+1;S.dhikr[d.id]=c[d.id];save();saveTsb(c);renderTsb();renderDhikr();
   if(navigator.vibrate)navigator.vibrate(8);
 }
-
 function tsbUndo(){
-  if(tsbIndex===-1){
-    if(tsbCustomCount>0)tsbCustomCount--;
-    document.getElementById('tsbCount').textContent=tsbCustomCount;
-    return;
-  }
-  const d=state.dhikrDefs[tsbIndex];if(!d)return;
-  const counts=getTsbCounts();if((counts[d.id]||0)>0){counts[d.id]--;state.dhikr[d.id]=counts[d.id];saveState();saveTsbCounts(counts);renderTasbih();renderDhikr();}
+  if(tsbCustom){if(tsbCustomCnt>0)tsbCustomCnt--;document.getElementById('tsbCount').textContent=tsbCustomCnt;return;}
+  const d=S.dhikrDefs[tsbIdx];if(!d)return;
+  const c=getTsb();if((c[d.id]||0)>0){c[d.id]--;S.dhikr[d.id]=c[d.id];save();saveTsb(c);renderTsb();renderDhikr();}
 }
-
 function tsbReset(){
-  if(tsbIndex===-1){tsbCustomCount=0;document.getElementById('tsbCount').textContent=0;return;}
-  const d=state.dhikrDefs[tsbIndex];if(!d)return;
-  const counts=getTsbCounts();counts[d.id]=0;state.dhikr[d.id]=0;saveState();saveTsbCounts(counts);renderTasbih();renderDhikr();
+  if(tsbCustom){tsbCustomCnt=0;document.getElementById('tsbCount').textContent=0;return;}
+  const d=S.dhikrDefs[tsbIdx];if(!d)return;
+  const c=getTsb();c[d.id]=0;S.dhikr[d.id]=0;save();saveTsb(c);renderTsb();renderDhikr();
 }
 
 // CALENDAR
-let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
-const MNAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DNAMES=['Su','Mo','Tu','We','Th','Fr','Sa'];
-function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
-function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();}
-function renderCalendar(){
-  const hist=loadHistory(),today=new Date();
-  document.getElementById('calTitle').textContent=MNAMES[calMonth]+' '+calYear;
-  const grid=document.getElementById('calGrid');grid.innerHTML='';
-  DNAMES.forEach(d=>{const el=document.createElement('div');el.className='cal-day-label';el.textContent=d;grid.appendChild(el);});
-  const firstDay=new Date(calYear,calMonth,1).getDay(),daysInMonth=new Date(calYear,calMonth+1,0).getDate();
-  for(let i=0;i<firstDay;i++){const el=document.createElement('div');el.className='cal-cell empty';grid.appendChild(el);}
+let calY=new Date().getFullYear(),calM=new Date().getMonth();
+const CMN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const CDN=['SU','MO','TU','WE','TH','FR','SA'];
+function calPrev(){calM--;if(calM<0){calM=11;calY--;}renderCal();}
+function calNext(){calM++;if(calM>11){calM=0;calY++;}renderCal();}
+function renderCal(){
+  const h=loadHist(),today=new Date();
+  // Month name + year
+  document.getElementById('calMonthName').textContent=CMN[calM];
+  document.getElementById('calYear').textContent=calY;
+  // Stats for this month
+  const daysInMonth=new Date(calY,calM+1,0).getDate();
+  let allPrayed=0,anyMissed=0,partial=0;
   for(let d=1;d<=daysInMonth;d++){
-    const key=calYear+'-'+calMonth+'-'+d;
-    const isToday=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
-    const cell=document.createElement('div');cell.className='cal-cell'+(isToday?' today':'');
-    cell.appendChild(Object.assign(document.createElement('div'),{textContent:d}));
-    const rec=hist[key];
-    if(rec){const dots=document.createElement('div');dots.className='cal-dots';const dot=document.createElement('div');dot.className='cal-dot '+(rec.prayed===rec.total?'dot-green':rec.missed>0?'dot-red':'dot-grey');dots.appendChild(dot);cell.appendChild(dots);}
-    grid.appendChild(cell);
+    const k=calY+'-'+calM+'-'+d,r=h[k];
+    if(r){if(r.pr===r.tot)allPrayed++;else if(r.mi>0)anyMissed++;else partial++;}
+  }
+  const statsEl=document.getElementById('calStats');
+  statsEl.innerHTML=`
+    <div class="cal-stat"><div class="cal-stat-val" style="color:var(--green)">${allPrayed}</div><div class="cal-stat-lbl">Full days</div></div>
+    <div class="cal-stat"><div class="cal-stat-val" style="color:var(--red)">${anyMissed}</div><div class="cal-stat-lbl">Missed</div></div>
+    <div class="cal-stat"><div class="cal-stat-val">${Math.round(allPrayed/(daysInMonth||1)*100)}%</div><div class="cal-stat-lbl">Completion</div></div>
+  `;
+  // Day labels
+  const dr=document.getElementById('calDayRow');dr.innerHTML='';
+  CDN.forEach(d=>{const e=document.createElement('div');e.className='cdlbl';e.textContent=d;dr.appendChild(e);});
+  // Grid
+  const g=document.getElementById('calGrid');g.innerHTML='';
+  const fd=new Date(calY,calM,1).getDay();
+  for(let i=0;i<fd;i++){const e=document.createElement('div');e.className='cc empty';g.appendChild(e);}
+  for(let d=1;d<=daysInMonth;d++){
+    const k=calY+'-'+calM+'-'+d;
+    const it=d===today.getDate()&&calM===today.getMonth()&&calY===today.getFullYear();
+    const cell=document.createElement('div');
+    const r=h[k];
+    cell.className='cc'+(it?' today':'')+(r?' has-data':'');
+    const num=document.createElement('div');num.className='cc-num';num.textContent=d;cell.appendChild(num);
+    if(r){const dot=document.createElement('div');dot.className='cc-dot '+(r.pr===r.tot?'dg':r.mi>0?'dr':'dm');cell.appendChild(dot);}
+    g.appendChild(cell);
   }
 }
 
 // JOURNAL
-function loadJournal(){try{return JSON.parse(localStorage.getItem(JOURNAL_KEY))||[];}catch{return[];}}
-function saveJournal(j){localStorage.setItem(JOURNAL_KEY,JSON.stringify(j));}
+function loadJ(){try{return JSON.parse(localStorage.getItem(SKJ))||[];}catch{return[];}}
+function saveJ(j){localStorage.setItem(SKJ,JSON.stringify(j));}
 function saveJournalEntry(){
-  const text=document.getElementById('journalTextarea').value.trim();if(!text)return;
-  const now=new Date(),j=loadJournal();
-  j.unshift({id:Date.now(),date:ORD(now.getDate())+' '+MONTHS[now.getMonth()]+' '+now.getFullYear(),text});
-  saveJournal(j);document.getElementById('journalTextarea').value='';renderJournal();
+  const tx=document.getElementById('journalTextarea').value.trim();if(!tx)return;
+  const now=new Date(),j=loadJ();
+  j.unshift({id:Date.now(),date:ORD(now.getDate())+' '+MO[now.getMonth()]+' '+now.getFullYear(),text:tx});
+  saveJ(j);document.getElementById('journalTextarea').value='';renderJ();
 }
-function deleteJournalEntry(id){saveJournal(loadJournal().filter(e=>e.id!==id));renderJournal();}
-function renderJournal(){
-  const entries=loadJournal(),c=document.getElementById('journalEntries');c.innerHTML='';
-  if(!entries.length){c.innerHTML='<div class="journal-empty">No entries yet. Write your first dua or reflection ✍️</div>';return;}
-  entries.forEach(e=>{
-    const div=document.createElement('div');div.className='journal-entry';
-    div.innerHTML='<div class="je-date">'+e.date+'</div><div class="je-text">'+escHtml(e.text)+'</div>';
-    const del=document.createElement('button');del.className='je-del';del.textContent='🗑 Delete';del.onclick=()=>deleteJournalEntry(e.id);
-    div.appendChild(del);c.appendChild(div);
+function delJEntry(id){saveJ(loadJ().filter(e=>e.id!==id));renderJ();}
+function renderJ(){
+  const ents=loadJ(),c=document.getElementById('journalEntries');c.innerHTML='';
+  if(!ents.length){c.innerHTML='<div class="j-empty">Your reflections will appear here.</div>';return;}
+  ents.forEach(e=>{
+    const div=document.createElement('div');div.className='je';
+    const hdr=document.createElement('div');hdr.className='je-header';
+    hdr.innerHTML='<div class="je-dot"></div><div class="je-d">'+e.date+'</div>';
+    const body=document.createElement('div');body.className='je-body';
+    const txt=document.createElement('div');txt.className='je-t';txt.textContent=e.text;
+    body.appendChild(txt);
+    const ftr=document.createElement('div');ftr.className='je-footer';
+    const del=document.createElement('button');del.className='je-del';del.textContent='Delete entry';del.onclick=()=>delJEntry(e.id);
+    ftr.appendChild(del);
+    div.appendChild(hdr);div.appendChild(body);div.appendChild(ftr);
+    c.appendChild(div);
   });
 }
 
-// NAV
 function showPage(name,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');btn.classList.add('active');
-  if(name==='tasbih')renderTasbih();
-  if(name==='calendar')renderCalendar();
-  if(name==='journal')renderJournal();
+  if(name==='tasbih')renderTsb();
+  if(name==='calendar')renderCal();
+  if(name==='journal')renderJ();
 }
 
-// MODALS
-let editDhikr=[];
-function openDhikrModal(){editDhikr=state.dhikrDefs.map(d=>(({...d})));buildDhikrEdit();document.getElementById('dhikrModal').classList.add('open');}
+let eDhikr=[];
+function openDhikrModal(){eDhikr=S.dhikrDefs.map(d=>(({...d})));buildDE();document.getElementById('dhikrModal').classList.add('open');}
 function closeDhikrModal(){document.getElementById('dhikrModal').classList.remove('open');}
-function buildDhikrEdit(){
+function buildDE(){
   const c=document.getElementById('dhikrEditList');c.innerHTML='';
-  editDhikr.forEach((d,i)=>{
-    const item=document.createElement('div');item.className='m-item';
-    item.innerHTML='<label>Dhikr Text</label><input type="text" value="'+esc(d.arabic)+'" oninput="editDhikr['+i+'].arabic=this.value"><label>Meaning</label><input type="text" value="'+esc(d.meaning)+'" oninput="editDhikr['+i+'].meaning=this.value"><label>Target</label><input type="number" value="'+d.target+'" min="1" oninput="editDhikr['+i+'].target=parseInt(this.value)||1"><div class="m-actions"><button class="del-btn" onclick="delDhikr('+i+')">🗑 Remove</button></div>';
-    c.appendChild(item);
+  eDhikr.forEach((d,i)=>{
+    const it=document.createElement('div');it.className='mi';
+    it.innerHTML='<label>Dhikr</label><input type="text" value="'+esc(d.arabic)+'" oninput="eDhikr['+i+'].arabic=this.value"><label>Meaning</label><input type="text" value="'+esc(d.meaning)+'" oninput="eDhikr['+i+'].meaning=this.value"><label>Target</label><input type="number" value="'+d.target+'" min="1" oninput="eDhikr['+i+'].target=parseInt(this.value)||1"><div class="mi-del"><button class="del-b" onclick="delD('+i+')">Remove</button></div>';
+    c.appendChild(it);
   });
 }
-function addDhikrItem(){editDhikr.push({id:'dh_'+Date.now(),arabic:'',meaning:'',target:33});buildDhikrEdit();}
-function delDhikr(i){editDhikr.splice(i,1);buildDhikrEdit();}
+function addDhikrItem(){eDhikr.push({id:'dh_'+Date.now(),arabic:'',meaning:'',target:33});buildDE();}
+function delD(i){eDhikr.splice(i,1);buildDE();}
 function saveDhikr(){
-  const v=editDhikr.filter(d=>d.arabic.trim());state.dhikrDefs=v;
-  v.forEach(d=>{if(state.dhikr[d.id]===undefined)state.dhikr[d.id]=0;});
-  saveState();renderDhikr();closeDhikrModal();
+  const v=eDhikr.filter(d=>d.arabic.trim());S.dhikrDefs=v;
+  v.forEach(d=>{if(S.dhikr[d.id]===undefined)S.dhikr[d.id]=0;});
+  save();renderDhikr();closeDhikrModal();
 }
-let editTasks=[];
-function openTaskModal(){editTasks=state.taskDefs.map(t=>(({...t})));buildTaskEdit();document.getElementById('taskModal').classList.add('open');}
+let eTasks=[];
+function openTaskModal(){eTasks=S.taskDefs.map(t=>(({...t})));buildTE();document.getElementById('taskModal').classList.add('open');}
 function closeTaskModal(){document.getElementById('taskModal').classList.remove('open');}
-function buildTaskEdit(){
+function buildTE(){
   const c=document.getElementById('taskEditList');c.innerHTML='';
-  editTasks.forEach((t,i)=>{
-    const item=document.createElement('div');item.className='m-item';
-    item.innerHTML='<label>Task Name</label><input type="text" value="'+esc(t.label)+'" oninput="editTasks['+i+'].label=this.value"><div class="m-actions"><button class="del-btn" onclick="delTask('+i+')">🗑 Remove</button></div>';
-    c.appendChild(item);
+  eTasks.forEach((t,i)=>{
+    const it=document.createElement('div');it.className='mi';
+    it.innerHTML='<label>Task</label><input type="text" value="'+esc(t.label)+'" oninput="eTasks['+i+'].label=this.value"><div class="mi-del"><button class="del-b" onclick="delT('+i+')">Remove</button></div>';
+    c.appendChild(it);
   });
 }
-function addTaskItem(){editTasks.push({id:'task_'+Date.now(),label:''});buildTaskEdit();}
-function delTask(i){editTasks.splice(i,1);buildTaskEdit();}
+function addTaskItem(){eTasks.push({id:'task_'+Date.now(),label:''});buildTE();}
+function delT(i){eTasks.splice(i,1);buildTE();}
 function saveTasksModal(){
-  const v=editTasks.filter(t=>t.label.trim());state.taskDefs=v;
-  v.forEach(t=>{if(state.tasks[t.id]===undefined)state.tasks[t.id]=false;});
-  saveState();renderTasks();closeTaskModal();
+  const v=eTasks.filter(t=>t.label.trim());S.taskDefs=v;
+  v.forEach(t=>{if(S.tasks[t.id]===undefined)S.tasks[t.id]=false;});
+  save();renderTasks();closeTaskModal();
 }
 
-// RESET
 function showConfirm(){document.getElementById('confirmBox').classList.add('vis');}
 function hideConfirm(){document.getElementById('confirmBox').classList.remove('vis');}
 function doReset(){
   const n={},dh={},tk={};
-  NAMAZ_LIST.forEach(x=>n[x.id]='pending');
-  state.dhikrDefs.forEach(x=>dh[x.id]=0);
-  state.taskDefs.forEach(x=>tk[x.id]=false);
-  state.namaz=n;state.dhikr=dh;state.tasks=tk;
-  saveState();renderAll();hideConfirm();
+  NL.forEach(x=>n[x.id]='pending');S.dhikrDefs.forEach(x=>dh[x.id]=0);S.taskDefs.forEach(x=>tk[x.id]=false);
+  S.namaz=n;S.dhikr=dh;S.tasks=tk;save();renderAll();hideConfirm();
 }
 
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escH(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 document.getElementById('dhikrModal').addEventListener('click',function(e){if(e.target===this)closeDhikrModal();});
 document.getElementById('taskModal').addEventListener('click',function(e){if(e.target===this)closeTaskModal();});
 
-setDailyQuote();
-renderAll();
-renderJournal();
-renderCalendar();
-initPrayerTimes();
-setInterval(()=>{updateHeader();checkMidnight();updateCountdown();},1000);
-setInterval(()=>{if(ptLoaded)renderNamaz();},60000);
+setQuote();renderAll();renderJ();renderCal();initPT();
+setInterval(()=>{updateHeader();midCheck();cdUpdate();},1000);
+setInterval(()=>{if(ptOK)renderNamaz();},60000);
 </script>
 </body>
 </html>
