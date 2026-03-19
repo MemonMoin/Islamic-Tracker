@@ -24,7 +24,7 @@
   --hi-brd:   #4caf70;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
 
 body {
   background: var(--bg);
@@ -33,6 +33,10 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
+/* Hide scrollbar everywhere */
+html, body { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 
 .frame {
   max-width: 430px;
