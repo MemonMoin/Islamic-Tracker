@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Daily Tracker">
+<title>Daily Tracker</title>
+<style>
 
-/* system fonts used */
 
 :root {
   --bg:       #0f1a12;
@@ -20,19 +27,15 @@
   --hi-brd:   #4caf70;
 }
 
-
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
-
-/* Hide scrollbar everywhere */
-html, body { scrollbar-width: none; -ms-overflow-style: none; }
-html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 
 .frame {
   max-width: 430px;
@@ -102,7 +105,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 /* ── Section ── */
 .section { margin: 0 12px 10px; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
 .sec-hdr { padding: 9px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.edit-btn { font-size: 11px; color: var(--teal); background: none; border: none; cursor: pointer; padding: 0; letter-spacing: 0; text-transform: none; font-family: -apple-system, 'Helvetica Neue', sans-serif; }
+.edit-btn { font-size: 11px; color: var(--teal); background: none; border: none; cursor: pointer; padding: 0; letter-spacing: 0; text-transform: none; font-family: -apple-system, sans-serif; }
 .sec-hdr-right { display: flex; align-items: center; gap: 10px; }
 .namaz-count { font-size: 11px; color: var(--accent); font-weight: 600; letter-spacing: 0; text-transform: none; }
 
@@ -124,6 +127,11 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 .st-prayed  { background: rgba(76,175,112,0.15);  color: var(--green); }
 .st-missed  { background: rgba(224,92,92,0.15);   color: var(--red); }
 .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: pulse 1.4s infinite; }
+
+/* Hide scrollbar */
+html, body { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.35;transform:scale(0.65)} }
 
 /* ── Dhikr ── */
@@ -160,12 +168,12 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 /* ── Bottom ── */
 .bottom { text-align: center; padding: 12px 20px 0; }
 .hint { font-size: 10px; color: var(--muted); margin-bottom: 10px; }
-.reset-btn { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--muted); font-size: 12px; padding: 6px 20px; border-radius: 20px; cursor: pointer; font-family: -apple-system, 'Helvetica Neue', sans-serif; }
+.reset-btn { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--muted); font-size: 12px; padding: 6px 20px; border-radius: 20px; cursor: pointer; font-family: -apple-system, sans-serif; }
 .confirm-box { display:none; margin:10px 0 0; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 16px; font-size:13px; text-align:center; }
 .confirm-box.vis { display:block; }
 .confirm-actions { display:flex; gap:10px; margin-top:10px; justify-content:center; }
-.cy { background:rgba(224,92,92,0.15); border:1px solid var(--red); color:var(--red); padding:5px 20px; border-radius:20px; font-size:12px; cursor:pointer; font-family:-apple-system,'Helvetica Neue',sans-serif; }
-.cn { background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--muted); padding:5px 20px; border-radius:20px; font-size:12px; cursor:pointer; font-family:-apple-system,'Helvetica Neue',sans-serif; }
+.cy { background:rgba(224,92,92,0.15); border:1px solid var(--red); color:var(--red); padding:5px 20px; border-radius:20px; font-size:12px; cursor:pointer; font-family:-apple-system,sans-serif; }
+.cn { background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--muted); padding:5px 20px; border-radius:20px; font-size:12px; cursor:pointer; font-family:-apple-system,sans-serif; }
 
 /* ── Modal ── */
 .modal-ov { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.82); z-index:100; align-items:flex-end; justify-content:center; }
@@ -176,13 +184,13 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 .m-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 14px; margin-bottom:10px; }
 .m-item label { display:block; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; margin-top:8px; }
 .m-item label:first-child { margin-top:0; }
-.m-item input { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:-apple-system,'Helvetica Neue',sans-serif; font-size:13px; padding:8px 10px; border-radius:7px; outline:none; }
+.m-item input { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:-apple-system,sans-serif; font-size:13px; padding:8px 10px; border-radius:7px; outline:none; }
 .m-item input[type=number] { width:80px; }
 .m-item input:focus { border-color:var(--accent); }
 .m-actions { margin-top:10px; }
-.del-btn { background:rgba(224,92,92,0.1); border:1px solid rgba(224,92,92,0.3); color:var(--red); font-size:11px; padding:4px 14px; border-radius:14px; cursor:pointer; font-family:-apple-system,'Helvetica Neue',sans-serif; }
-.add-btn { display:block; width:100%; background:rgba(86,201,160,0.07); border:1px dashed var(--teal); color:var(--teal); font-size:13px; padding:10px; border-radius:10px; cursor:pointer; font-family:-apple-system,'Helvetica Neue',sans-serif; margin-top:4px; text-align:center; }
-.save-btn { display:block; width:100%; background:var(--accent); border:none; color:#0a1a0c; font-size:14px; font-weight:700; padding:12px; border-radius:10px; cursor:pointer; font-family:-apple-system,'Helvetica Neue',sans-serif; margin-top:14px; }
+.del-btn { background:rgba(224,92,92,0.1); border:1px solid rgba(224,92,92,0.3); color:var(--red); font-size:11px; padding:4px 14px; border-radius:14px; cursor:pointer; font-family:-apple-system,sans-serif; }
+.add-btn { display:block; width:100%; background:rgba(86,201,160,0.07); border:1px dashed var(--teal); color:var(--teal); font-size:13px; padding:10px; border-radius:10px; cursor:pointer; font-family:-apple-system,sans-serif; margin-top:4px; text-align:center; }
+.save-btn { display:block; width:100%; background:var(--accent); border:none; color:#0a1a0c; font-size:14px; font-weight:700; padding:12px; border-radius:10px; cursor:pointer; font-family:-apple-system,sans-serif; margin-top:14px; }
 </style>
 </head>
 <body>
