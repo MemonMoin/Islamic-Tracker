@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICA8IS0tIEJhY2tncm91bmQgLS0+CiAgPHJlY3Qgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxODAiIHJ4PSI0MCIgZmlsbD0iIzBmMWExMiIvPgogIAogIDwhLS0gTWFpbiBkb21lIC0tPgogIDxlbGxpcHNlIGN4PSI5MCIgY3k9IjcyIiByeD0iMzgiIHJ5PSIzNiIgZmlsbD0iIzRjYWY3MCIvPgogIAogIDwhLS0gRG9tZSB0b3AgY3Jlc2NlbnQgLS0+CiAgPGNpcmNsZSBjeD0iOTAiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2M4YTg0YiIvPgogIDxjaXJjbGUgY3g9Ijk0IiBjeT0iMzYiIHI9IjUuNSIgZmlsbD0iIzBmMWExMiIvPgogIAogIDwhLS0gTWFpbiBidWlsZGluZyBib2R5IC0tPgogIDxyZWN0IHg9IjUyIiB5PSIxMDgiIHdpZHRoPSI3NiIgaGVpZ2h0PSI1MiIgcng9IjQiIGZpbGw9IiM0Y2FmNzAiLz4KICAKICA8IS0tIE1haW4gZG9vciBhcmNoIC0tPgogIDxyZWN0IHg9Ijc4IiB5PSIxMTgiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0MiIgcng9IjEyIiBmaWxsPSIjMGYxYTEyIi8+CiAgCiAgPCEtLSBMZWZ0IG1pbmFyZXQgLS0+CiAgPHJlY3QgeD0iMzYiIHk9IjkwIiB3aWR0aD0iMTQiIGhlaWdodD0iNzAiIHJ4PSIzIiBmaWxsPSIjNTZjOWEwIi8+CiAgPCEtLSBMZWZ0IG1pbmFyZXQgdG9wIC0tPgogIDxlbGxpcHNlIGN4PSI0MyIgY3k9IjkwIiByeD0iNyIgcnk9IjEwIiBmaWxsPSIjNGNhZjcwIi8+CiAgPGNpcmNsZSBjeD0iNDMiIGN5PSI4MSIgcj0iMyIgZmlsbD0iI2M4YTg0YiIvPgoKICA8IS0tIFJpZ2h0IG1pbmFyZXQgLS0+CiAgPHJlY3QgeD0iMTMwIiB5PSI5MCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjcwIiByeD0iMyIgZmlsbD0iIzU2YzlhMCIvPgogIDwhLS0gUmlnaHQgbWluYXJldCB0b3AgLS0+CiAgPGVsbGlwc2UgY3g9IjEzNyIgY3k9IjkwIiByeD0iNyIgcnk9IjEwIiBmaWxsPSIjNGNhZjcwIi8+CiAgPGNpcmNsZSBjeD0iMTM3IiBjeT0iODEiIHI9IjMiIGZpbGw9IiNjOGE4NGIiLz4KCiAgPCEtLSBHcm91bmQgbGluZSAtLT4KICA8cmVjdCB4PSIyMCIgeT0iMTU4IiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSIjMmEzZDJlIi8+CgogIDwhLS0gTGVmdCB3aW5kb3cgLS0+CiAgPHJlY3QgeD0iNTgiIHk9IjExOCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE4IiByeD0iNyIgZmlsbD0iIzBmMWExMiIvPgogIDwhLS0gUmlnaHQgd2luZG93IC0tPgogIDxyZWN0IHg9IjEwOCIgeT0iMTE4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTgiIHJ4PSI3IiBmaWxsPSIjMGYxYTEyIi8+Cjwvc3ZnPg==">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICA8IS0tIEJhY2tncm91bmQgLS0+CiAgPHJlY3Qgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxODAiIHJ4PSI0MCIgZmlsbD0iIzBmMWExMiIvPgogIAogIDwhLS0gTWFpbiBkb21lIC0tPgogIDxlbGxpcHNlIGN4PSI5MCIgY3k9IjcyIiByeD0iMzgiIHJ5PSIzNiIgZmlsbD0iIzRjYWY3MCIvPgogIAogIDwhLS0gRG9tZSB0b3AgY3Jlc2NlbnQgLS0+CiAgPGNpcmNsZSBjeD0iOTAiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2M4YTg0YiIvPgogIDxjaXJjbGUgY3g9Ijk0IiBjeT0iMzYiIHI9IjUuNSIgZmlsbD0iIzBmMWExMiIvPgogIAogIDwhLS0gTWFpbiBidWlsZGluZyBib2R5IC0tPgogIDxyZWN0IHg9IjUyIiB5PSIxMDgiIHdpZHRoPSI3NiIgaGVpZ2h0PSI1MiIgcng9IjQiIGZpbGw9IiM0Y2FmNzAiLz4KICAKICA8IS0tIE1haW4gZG9vciBhcmNoIC0tPgogIDxyZWN0IHg9Ijc4IiB5PSIxMTgiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0MiIgcng9IjEyIiBmaWxsPSIjMGYxYTEyIi8+CiAgCiAgPCEtLSBMZWZ0IG1pbmFyZXQgLS0+CiAgPHJlY3QgeD0iMzYiIHk9IjkwIiB3aWR0aD0iMTQiIGhlaWdodD0iNzAiIHJ4PSIzIiBmaWxsPSIjNTZjOWEwIi8+CiAgPCEtLSBMZWZ0IG1pbmFyZXQgdG9wIC0tPgogIDxlbGxpcHNlIGN4PSI0MyIgY3k9IjkwIiByeD0iNyIgcnk9IjEwIiBmaWxsPSIjNGNhZjcwIi8+CiAgPGNpcmNsZSBjeD0iNDMiIGN5PSI4MSIgcj0iMyIgZmlsbD0iI2M4YTg0YiIvPgoKICA8IS0tIFJpZ2h0IG1pbmFyZXQgLS0+CiAgPHJlY3QgeD0iMTMwIiB5PSI5MCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjcwIiByeD0iMyIgZmlsbD0iIzU2YzlhMCIvPgogIDwhLS0gUmlnaHQgbWluYXJldCB0b3AgLS0+CiAgPGVsbGlwc2UgY3g9IjEzNyIgY3k9IjkwIiByeD0iNyIgcnk9IjEwIiBmaWxsPSIjNGNhZjcwIi8+CiAgPGNpcmNsZSBjeD0iMTM3IiBjeT0iODEiIHI9IjMiIGZpbGw9IiNjOGE4NGIiLz4KCiAgPCEtLSBHcm91bmQgbGluZSAtLT4KICA8cmVjdCB4PSIyMCIgeT0iMTU4IiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSIjMmEzZDJlIi8+CgogIDwhLS0gTGVmdCB3aW5kb3cgLS0+CiAgPHJlY3QgeD0iNTgiIHk9IjExOCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE4IiByeD0iNyIgZmlsbD0iIzBmMWExMiIvPgogIDwhLS0gUmlnaHQgd2luZG93IC0tPgogIDxyZWN0IHg9IjEwOCIgeT0iMTE4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTgiIHJ4PSI3IiBmaWxsPSIjMGYxYTEyIi8+Cjwvc3ZnPg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAGv0lEQVR42u3dTW7kNhCG4bpBAC9zpWSdc8yRsswu10hOxcCDmaDHiSVSrCrWz7sgMMDYovjV43a3LLHkp5/fBoNRZci3f8jBobGQ7OdfbT3Hzv8EaI+fVEA3rYcX6JO/hgDdqB7WoCO9vwJ0g3pYgY78waEj6Db10Aad6RNxB9Dt6qEJOuNlnsqgW9ZDA3SF65eVQLeuxy7oShflK4BuX48d0BX/0pQZNPXYAF35z6cZQVOPDdAd7gnIBJp6bIDudKNLBtDUYwN0x7u3IoOmHhugO9+SGBE09dgAzX22sUBTD0ADGtCENxti9rlK1eMKNKHNhZh5nnL1ADSgW4AmrPkQs85Rsh6ABnR50IS0FmLG45etB6ABXRo04ayHmO3YpesBaEADmgHoDKAJ5VmImY5bvh6ABjSgGYAGdHPQf/3xC6AdQTMMxjvi10Em9gPQYAY0A8yAbooZ0IAGNAPQp8evf375OgAN6NSAX8f/YV4F/Xo8cga0O2JN1FfHJX9Au0K+A32Hevb41APQLpBnQH+G+sk81AfQppBXUL+O3bmoF6BNMa+g1pqLugHaFPMMau25qB+gzSB/httjHkCDudwANJhBDWgwgzouaAHzoyFGGAXUPIJ14pU5POhmqAENaECDORnoRqj77JxkhM4SNKjZCgzQgG4AOhM662N3Ay1gXgInGY9fFTOgAd0CtIB5GptknaMiZkADug1oAfQUNC/QXPGYwFwadFZonvN0Ay2AvkXmCZpX6RvMM6AF0JfAvEFzj8eN15KgswI7MV9H0MKrcyjQ3V+lRQO0NAUtQUF3fQBANEFLM9ASHLQ0Ay0WoKUJaEkCWpqAFkvQUhy0JAMtxUGLB2gpClqSgpaioMUTtBQDLclBSzHQcgK0NMccDXQV1HISdDjYTnCigl46ryqQLUBLMtBSHLQkAy0RQYeA7YQlA+jbc6wC2Rr0UdhOSDKB/vRcq0D2An0EthOOjKD/c85VIHuDVsG90B5NHEdG0P8OzdxPIT4Nehn4RDepH44J6CXQn9Zjo4noMU8p7s2w6vnH+KKaOxueP8QM6jOYM6BOcU/GVRcpQOuD3skd0IAGdAfQK63RQK2PeSd3QCtABPSZvAANaEADWvdXKJjfAA1oQAM6AGhQ2+YEaMMHXEF9Jh9AX4zf/v79Uajv3wfo5/Cscge0YbBgBnQp0F1RR8gd0IAGNKDfQP3wAxugDUGvhvv9ewK0rEiJ2TP3tqBnw339+iB9WNJh9s4d0IbBghnQbqDvwv34tcE6ZqXBfCr3lqA/hnz1/0FbwYWGHCF3C9Bhnvq+Cu5iyPvQOJ+MT31rrPt7hk/yj/jUd5htCx6C/hisJ+qjoLXqoZR7m305VH71PQzWGvYR0Nr1MAZdZuck1fdym8FawXYFbVUPR9Ap97Yz+XCiFKw2bBfQ1vU4ADrF7qOmn7Yj/erzAJ38rV76/aFHMtCq61a+9OZejwCgw+zg73YdeiZYeqw8+0EKAvp4j5VRBHTbLlhBQR/pgjWKgW7ZpzAwaNc+haMo6HadZIODdukkO4qDbtXrOwFo017fownokQT0aAJ6WIAezUCP4KBHM9BDE/RoCnoEBT2agh4aoEdz0CMY6NEc9AA0oAF9qhNsUNBDo0m811wNQI8noAegp6A9fiRKY57GoAegHUArPcsIaGXQA9DTqFUeVJ2dA9DXqAG9//5WbY/kXdA7668MenQAvbmdwQ/YDDZ8n8assS1DctCjPWiFPTpeH42y6GIwBVprr5HKoEd10Iobz3iA9lhHBdCjJWjl3ZQsM9u+JLiCGtCABnQC0APQyxAsQQ9Ar+fWBrTFJo4nQButA9DdQRvnJjfzAhrQgO4EegD6EWj3rrqALrThOaABDWhAAxrQgAY0oAEN6JT3Qx8Fzf3QgAY0oAENaEADGtCABjSgAQ1oQAMa0IAGNKABDWhAAxrQgAY0oAENaEC3AC2AfgTa/YkVQPMIFqABDWhAAxrQgA4FWgC9hECMQQug2QoM0IAGNKDrghZAz+3i7wRaAM2G54AGNE2DVnusOIKmaRBNgwANaPoULjULcgZNn8LNPoXhblqK9EnaISfqYQCaEO+RSYG5StXjDjQhnsmHejzMB9CAbgdaCC8UaOqhAFoILxRo6qEAWggvFGjqoQBaCC8UaOqhAFoILxRo6qEAWggvFGjqoQBawBwKNPVQAC3NMUuT80lTDw3QmYOMum7qEQC0NMQsDc8tdD20QWcIMsNaqUcw0BGDzLRG6hEUdIQgM66NegQH7R1m9vVQj0SgLQLNfv7V1nPs/P8B5xZIa6O+Rc8AAAAASUVORK5CYII=">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Daily Tracker">
@@ -61,8 +61,10 @@ body {
 .day-type.weekday { color: var(--accent); }
 .day-type.weekend { color: var(--weekend); }
 .hijri { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.location-line { font-size: 11px; color: var(--teal); margin-top: 2px; display: flex; align-items: center; gap: 4px; }
 .clock-row { display: flex; align-items: center; justify-content: space-between; margin-top: 5px; }
 .live-clock { font-size: 12px; color: var(--muted); }
+
 .streak-badge {
   display: flex; align-items: center; gap: 5px;
   background: rgba(200,168,75,0.12);
@@ -206,6 +208,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
       <span class="day-type" id="dayType"></span>
     </div>
     <div class="hijri" id="hijriDate"></div>
+    <div class="location-line" id="locationLine"></div>
     <div class="clock-row">
       <div class="live-clock" id="liveClock"></div>
       <div class="streak-badge">🔥 <span id="streakNum">0</span> day streak</div>
@@ -449,10 +452,27 @@ let ptLoaded = false;
 function initPrayerTimes() {
   if (!navigator.geolocation) { ptLoaded=true; renderNamaz(); updateCountdown(); return; }
   navigator.geolocation.getCurrentPosition(
-    pos => fetchPT(pos.coords.latitude, pos.coords.longitude),
-    ()  => { ptLoaded=true; renderNamaz(); updateCountdown(); },
+    pos => {
+      fetchPT(pos.coords.latitude, pos.coords.longitude);
+      fetchLocationName(pos.coords.latitude, pos.coords.longitude);
+    },
+    () => { ptLoaded=true; renderNamaz(); updateCountdown(); },
     { timeout:8000 }
   );
+}
+
+function fetchLocationName(lat, lon) {
+  fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+    .then(r => r.json())
+    .then(data => {
+      const addr = data.address;
+      const city = addr.city || addr.town || addr.village || addr.county || '';
+      const country = addr.country_code ? addr.country_code.toUpperCase() : '';
+      const loc = [city, country].filter(Boolean).join(', ');
+      const el = document.getElementById('locationLine');
+      if (el && loc) el.innerHTML = '📍 ' + loc;
+    })
+    .catch(() => {});
 }
 
 function fetchPT(lat, lon) {
